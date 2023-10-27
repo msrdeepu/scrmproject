@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OverviewController;
+use App\Http\Controllers\MediamanagerController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,6 +36,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/scrm-overview', [OverviewController::class, 'index'])->name('overview.index');
+
+    Route::get('/scrm-media', [MediamanagerController::class, 'index'])->name('media.index');
+    
+    
+    Route::get('/scrm-contacts', [ContactController::class, 'index'])->name('contacts.index');
 });
 
 require __DIR__.'/auth.php';
