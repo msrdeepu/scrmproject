@@ -1,67 +1,48 @@
-import React, { useState } from "react";
+import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
-//components
-import CardItem from "@/Components/CardItem";
-import ListCardContact from "@/Components/ListCardContact";
+//custom components
+import Contactcard from "@/Components/Customcomponents/Cards/Contactcard";
+import Flexcontainer from "@/Components/Customcomponents/Flexcontainer";
+import Addbutton from "@/Components/Customcomponents/Buttons/Addbutton";
 
-import { BsFillGridFill, BsCardList } from "react-icons/bs";
-
-const Contactslist = ({ auth, mustVerifyEmail, status }) => {
-    const [grid, setGrid] = useState(true);
-
-    const gridListHandler = () => {
-        setGrid(!grid);
-    };
+const Contactslist = ({ auth }) => {
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Manage Contacts
-                </h2>
-            }
-        >
+        <AuthenticatedLayout user={auth.user}>
+            <Head title="Dashboard" />
+
             <div className="py-2">
-                <div className="w-[100%] mx-auto p-1">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
-                        <div className="flex justify-end">
-                            <input
-                                type="search"
-                                className="enabled:hover:border-gray-400 disabled:opacity-75 rounded m-3"
-                                placeholder="Search"
-                            />{" "}
-                            {grid ? (
-                                <BsFillGridFill
-                                    onClick={gridListHandler}
-                                    className="text-4xl text-orange-500 m-3"
-                                />
-                            ) : (
-                                <BsCardList
-                                    onClick={gridListHandler}
-                                    className="text-4xl text-orange-500 m-3"
-                                />
-                            )}
-                        </div>
-                        {grid ? (
+                <div className="w-[100%] mx-auto p-1 flex flex-col justify-center items-center">
+                    <div className=" bg-white shadow-lg rounded-md sm:w-[100%] md:w-[35%] p-5">
+                        <div className="flex flex-row justify-between">
                             <div>
-                                <ListCardContact />
-                                <ListCardContact />
-                                <ListCardContact />
-                                <ListCardContact />
-                                <ListCardContact />
+                                {" "}
+                                <p>ID</p>
+                                <p>CODE</p>
+                                <p>Full Name</p>
+                                <p>Contact Type</p>
+                                <p>Company</p>
+                                <p>Mobile</p>
+                                <p>Email</p>
+                                <p>Website</p>
                             </div>
-                        ) : (
-                            <div className="flex flex-wrap justify-around">
-                                <CardItem />
-                                <CardItem />
-                                <CardItem />
-                                <CardItem />
-                                <CardItem />
-                                <CardItem />
+                            <div>
+                                <p>66</p>
+                                <p>1685440720</p>
+                                <p>V Sarada Devi</p>
+                                <p>BUSINESS</p>
+                                <p>Sri Vasavi Chemical Corporation</p>
+                                <p>9849803444</p>
+                                <p>info@svccorp.in</p>
+                                <p>https://www.svccorp.in/</p>
                             </div>
-                        )}
+                        </div>
+                        <div className="text-center mt-5 flex flex-row justify-evenly">
+                            <Addbutton>Add</Addbutton>
+                            <p>Buttons</p>
+                            <p>Buttons</p>
+                        </div>
                     </div>
                 </div>
             </div>

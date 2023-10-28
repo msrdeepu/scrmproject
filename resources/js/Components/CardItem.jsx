@@ -1,3 +1,5 @@
+import Contactcard from "./Customcomponents/Cards/Contactcard";
+
 export default function CardItem({
     type = "div",
     className = "",
@@ -7,7 +9,7 @@ export default function CardItem({
 }) {
     return (
         <>
-            <div class="max-w-lg rounded shadow-lg m-3">
+            <Contactcard>
                 <div className="flex justify-evenly">
                     <div className="p-3">
                         <ul>
@@ -46,7 +48,7 @@ export default function CardItem({
                         <button className=" text-white">Delete</button>
                     </span>
                 </div>
-            </div>
+            </Contactcard>
         </>
     );
 }
