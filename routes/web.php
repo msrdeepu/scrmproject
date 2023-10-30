@@ -43,6 +43,8 @@ Route::middleware('auth')->group(function () {
     
     
     Route::get('/scrm-contacts', [ContactController::class, 'index'])->name('contacts.index');
+    Route::get('/scrm-contacts/create', [ContactController::class, 'create'])->name('contacts.create');
+    Route::post('/scrm-contacts/store', [ContactController::class, 'store'])->name('contacts.store');
 });
 
 require __DIR__.'/auth.php';

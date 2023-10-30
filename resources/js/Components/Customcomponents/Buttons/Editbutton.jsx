@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
-const Addbutton = styled.button`
-    background-color: #9f44d3;
+const Editbutton = styled.button`
+    background-color: orange;
     color: white;
     padding: 6px;
-    width: auto;
+    width: 90px;
     border-radius: 3px;
     font-size: large;
-    margin: 2px;
 `;
 
-export default Addbutton;
+export default Editbutton;
