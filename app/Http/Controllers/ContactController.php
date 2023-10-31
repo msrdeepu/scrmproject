@@ -12,7 +12,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Contact/Contactslist');
+        $resource = Contact::get(['*', 'id AS key']);
+        return Inertia::render('Contact/Contactslist', [
+            'resource' => $resource,
+        ]);
     }
 
     /**
@@ -39,6 +42,8 @@ class ContactController extends Controller
 
         $data= Contact::create($requestData);
         $data->save();
+
+        return to_route('contacts.index');
     }
 
     /**

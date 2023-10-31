@@ -266,7 +266,8 @@ const ContactForm = ({ saveButton, data, setData, submitHandler }) => {
                         <label htmlFor="imgavatar" className="m-3">
                             Image / Avatar
                         </label>
-                        <input
+                        <Forminput
+                            className="m-3"
                             type="file"
                             onChange={(e) =>
                                 setData("avatar", e.target.files[0])
