@@ -29,30 +29,15 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $data= Contact::create([
-        "contype" => $request -> contype,
-        "title" => $request -> title,
-        "fullname" => $request -> fullname,
-        "designation" => $request -> designation,
-        "cname" => $request -> cname,
-        "pan" => $request -> pan,
-        "gst" => $request -> gst,
-        "phone" => $request -> phone,
-        "mobile" => $request -> mobile,
-        "altnum" => $request -> altnum,
-        "whatsapp" => $request -> whatsapp,
-        "emailid" => $request -> emailid,
-        "altemail" => $request -> altemail,
-        "weburl" => $request -> weburl,
-        "town" => $request -> town,
-        "country" => $request -> country,
-        "avatar" => $request -> avatar,
-        "status" => $request -> status,
-        "houseaddress" => $request -> houseaddress,
-        "officeaddress" => $request -> officeaddress,
-        "paddress" => $request -> paddress,
-        "bankdetails" => $request -> bankdetails,
-        ]);
+        $avatar = null;
+        $requestData = $request->all();
+
+        if ($request -> file('avatar')){
+            $avatar = $request -> file('avatar') -> store('contacts', 'public');
+            $requestData['avatar'] = $avatar;
+        }
+
+        $data= Contact::create($requestData);
         $data->save();
     }
 

@@ -4,9 +4,10 @@ import { Head, Link } from "@inertiajs/react";
 import Forminput from "@/Components/Customcomponents/FormItems/Forminut";
 
 const ContactForm = ({ saveButton, data, setData, submitHandler }) => {
-    const [values, setValues] = useState({
-        contype: "",
-    });
+    const handleAvatar = (e) => {
+        setData(e.target.files[0]);
+        //console.log(e.target.files[0]);
+    };
 
     return (
         <div className="pl-7">
@@ -262,18 +263,14 @@ const ContactForm = ({ saveButton, data, setData, submitHandler }) => {
 
                     <div className="sm:col-start-1 md:col-start-2 md:col-end-4">
                         {" "}
-                        <label htmlFor="avatar" className="m-3">
+                        <label htmlFor="imgavatar" className="m-3">
                             Image / Avatar
                         </label>
                         <input
-                            id="avatar"
-                            value={data.avatar}
+                            type="file"
                             onChange={(e) =>
                                 setData("avatar", e.target.files[0])
                             }
-                            type="file"
-                            placeholder="Image / Avatar"
-                            className="m-3"
                         />
                     </div>
                     <div className="sm:col-start-1 md:col-start-4 md:col-end-6">
