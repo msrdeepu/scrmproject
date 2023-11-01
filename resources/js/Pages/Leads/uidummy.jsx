@@ -4,11 +4,8 @@ import { Head, Link, router } from "@inertiajs/react";
 
 //custom components
 import Addbutton from "@/Components/Customcomponents/Buttons/Addbutton";
-import Editbutton from "@/Components/Customcomponents/Buttons/Editbutton";
-import Deletebutton from "@/Components/Customcomponents/Buttons/Deletebutton";
-import Searchinput from "@/Components/Customcomponents/Inputs/Searchinput";
 
-const Leadslist = ({ auth }) => {
+const Uidummy = ({ auth }) => {
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Manage -Leads" />
@@ -16,14 +13,14 @@ const Leadslist = ({ auth }) => {
             <div className="py-2">
                 <div className="w-[100%] mx-auto p-4 flex flex-row flex-wrap justify-center">
                     <div className="w-[20%] flex flex-col p-4 max-h-[50vh] bg-white m-2 mr-6 rounded-md shadow-md">
-                        <h4 className="mt-2 mb-3">Search Leads Here</h4>
+                        <h4 className="m-4">Search Leads Here</h4>
                         <input
                             type="search"
                             className="rounded-md mt-3"
                             placeholder="Search Leads"
                         />
-                        <h4 className="mt-5">Add New Lead</h4>
-                        <Addbutton>Add New</Addbutton>
+                        <h4 className="m-4">Add New Lead</h4>
+                        <Addbutton className="mt-3">Add New</Addbutton>
                     </div>
                     <div className="w-[70%] flex flex-col p-4 bg-white m-2 ml-6 rounded-md shadow-md max-h-[90vh] overflow-y-scroll">
                         ecimen book.What is Lorem Ipsum? Lorem Ipsum is simply
@@ -39,4 +36,4 @@ const Leadslist = ({ auth }) => {
     );
 };
 
-export default Leadslist;
+export default Uidummy;
