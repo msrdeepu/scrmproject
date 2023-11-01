@@ -24,7 +24,10 @@ class ContactController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Contact/Createcontact');
+        $user = Auth::user();
+        return Inertia::render('Contact/Createcontact', [
+            'record'=> new Contact(),
+        ]);
     }
 
     /**
@@ -63,6 +66,9 @@ class ContactController extends Controller
         $user = Auth::user();
         $contacts = Contact::get(['id', 'contype', 'title', 'fullname', 'designation', 'cname', 'pan', 'gst', 'phone', 'mobile', 'altnum', 'whatsapp', 'emailid', 'altemail', 'weburl', 'town', 'country', 'avatar', 'status', 'houseaddress', 'officeaddress', 'paddress', 'bankdetails']);
         $contact= Contact::find($id);
+        if($contact->avatar != null){
+            $contact->avatarPath = asset('storage/'.$contact->avatar);
+         }
         return Inertia::render('Contact/Createcontact', [
             'user' => $user,
             'contactsList' => $contacts,
@@ -73,11 +79,33 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request, Contact $contact, $id)
     {
-        //
+        $contact = Contact::find($id);
+        $avatar = null;
+        $requestData = $request->all();
+        if ($request->file('avatar')) {
+            Storage::delete('public' . $contacts->avatar);
+            $avatar = $request->file('avatar')->store('contacts', 'public');
+            $requestData['avatar'] = $avatar;
+        }
+        $updated=$contact->update($requestData);
     }
 
+    // delete page assets
+    public function deleteasset($id, $asset)
+    {
+        $contact = Contact::find($id);
+
+        switch($asset) {
+            case('avatar'):
+                Storage::delete('public' . $contact->avatar);
+                $contact->update(["avatar"=> null]);
+                break;
+            default:
+
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */

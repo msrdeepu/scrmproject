@@ -34,6 +34,13 @@ const Createcontact = ({ auth, saveButton, contactsList, record }) => {
         console.log(data);
         post("/scrm-contacts/store");
     };
+
+    //update form submission
+    const updateHandler = (e) => {
+        e.preventDefault();
+        patch(`/scrm-contacts/${record.id}`, data);
+    };
+
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="create-contact" />
@@ -46,8 +53,16 @@ const Createcontact = ({ auth, saveButton, contactsList, record }) => {
                                     record={record}
                                     data={data}
                                     setData={setData}
-                                    saveButton={"Add"}
-                                    submitHandler={submitHandler}
+                                    saveButton={
+                                        record.contype == undefined
+                                            ? "Add"
+                                            : "Save"
+                                    }
+                                    submitHandler={
+                                        record.contype
+                                            ? submitHandler
+                                            : updateHandler
+                                    }
                                 />
                             </div>
                         </div>

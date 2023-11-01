@@ -4,15 +4,27 @@ import { Head, Link } from "@inertiajs/react";
 import Forminput from "@/Components/Customcomponents/FormItems/Forminut";
 
 const ContactForm = ({ saveButton, data, setData, submitHandler, record }) => {
-    const handleAvatar = (e) => {
-        setData(e.target.files[0]);
-        //console.log(e.target.files[0]);
-    };
+    let avatar = "";
+    if (record.avatar != null) {
+        avatar = (
+            <>
+                <img
+                    className="h-[150px]"
+                    src={`http://127.0.0.1:8000/storage/${record.avatar}`}
+                />{" "}
+                <Link href={`/scrm-contacts/${record.id}/avatar`} method="post">
+                    <button className="rounded bg-red-500 text-white p-2">
+                        Delete
+                    </button>{" "}
+                    <br />
+                </Link>
+            </>
+        );
+    }
 
     return (
         <div className="pl-7">
             {console.log(record)}
-            {/* <img src={`http://127.0.0.1:8000/storage/${record.avatar}`} /> */}
             <form className="" onSubmit={submitHandler}>
                 <div className="grid sm:grid-cols-1 md:grid-cols-6 gap-4">
                     <div className="sm:col-start-1 md:col-start-2 md:col-end-4">
@@ -264,7 +276,7 @@ const ContactForm = ({ saveButton, data, setData, submitHandler, record }) => {
                     </div>
 
                     <div className="sm:col-start-1 md:col-start-2 md:col-end-4">
-                        {" "}
+                        {avatar}{" "}
                         <label htmlFor="imgavatar" className="m-3">
                             Image / Avatar
                         </label>
