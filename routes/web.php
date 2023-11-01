@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OverviewController;
 use App\Http\Controllers\MediamanagerController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LeadController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -49,6 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/scrm-contacts/{id}', [ContactController::class, 'update'])->name('contacts.update');
     Route::post('/scrm-contacts/{id}/{asset}', [ContactController::class, 'deleteasset'])->name('contacts.deleteasset');
     Route::delete('/scrm-contacts/{id}', [ContactController::class, 'destroy']) -> name('contacts.destroy');
+
+    Route::get('/scrm-leads', [LeadController::class, 'index'])->name('leads.index');
 });
 
 require __DIR__.'/auth.php';

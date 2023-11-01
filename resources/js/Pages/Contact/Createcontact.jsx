@@ -4,7 +4,7 @@ import { Head, useForm } from "@inertiajs/react";
 import ContactForm from "./ContactForm";
 
 const Createcontact = ({ auth, saveButton, contactsList, record }) => {
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, processing, errors, patch } = useForm({
         contype: record.contype,
         title: record.title,
         fullname: record.fullname,
@@ -38,6 +38,7 @@ const Createcontact = ({ auth, saveButton, contactsList, record }) => {
     //update form submission
     const updateHandler = (e) => {
         e.preventDefault();
+        // patch(route("contacts.update"));
         patch(`/scrm-contacts/${record.id}`, data);
     };
 
@@ -59,7 +60,7 @@ const Createcontact = ({ auth, saveButton, contactsList, record }) => {
                                             : "Save"
                                     }
                                     submitHandler={
-                                        record.contype
+                                        record.contype == undefined
                                             ? submitHandler
                                             : updateHandler
                                     }

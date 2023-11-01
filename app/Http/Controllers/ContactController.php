@@ -79,8 +79,9 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Contact $contact, $id)
+    public function update(Request $request, $id)
     {
+        dd($request);
         $contact = Contact::find($id);
         $avatar = null;
         $requestData = $request->all();

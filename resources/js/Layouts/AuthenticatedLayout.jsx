@@ -116,6 +116,11 @@ export default function Authenticated({ user, header, children }) {
                                                 >
                                                     Manage Contacts
                                                 </Dropdown.Link>
+                                                <Dropdown.Link
+                                                    href={route("leads.index")}
+                                                >
+                                                    Manage Leads
+                                                </Dropdown.Link>
                                                 {/* <Dropdown.Link
                                                     href={route(
                                                         "overview.index"
