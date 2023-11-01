@@ -1,26 +1,26 @@
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
-
-//react-ions
-import { AiFillPlusCircle } from "react-icons/ai";
-
-//contacts-list
-import Contacts from "./Contacts";
+import { Head, Link, router } from "@inertiajs/react";
 
 //custom components
-import Contactcard from "@/Components/Customcomponents/Cards/Contactcard";
-import Flexcontainer from "@/Components/Customcomponents/Flexcontainer";
 import Addbutton from "@/Components/Customcomponents/Buttons/Addbutton";
 import Editbutton from "@/Components/Customcomponents/Buttons/Editbutton";
 import Deletebutton from "@/Components/Customcomponents/Buttons/Deletebutton";
 import Searchinput from "@/Components/Customcomponents/Inputs/Searchinput";
-import CardItem from "@/Components/CardItem";
 
 const Contactslist = ({ auth, resource }) => {
+    //Loading Edit View
+    function editRecord(e) {
+        router.get(route("contacts.edit", e.currentTarget.id));
+    }
+
+    function destroyRecord(e) {
+        if (confirm("Are you sure you want to delete this record ?")) {
+            router.delete(route("contacts.destroy", e.currentTarget.id));
+        }
+    }
     return (
         <AuthenticatedLayout user={auth.user}>
-            {/* {console.log(Contacts)} */}
             {console.log(resource)}
             <Head title="Dashboard" />
             <div className="bg-white h-[55px] flex flex-row justify-evenly items-center">
@@ -33,7 +33,10 @@ const Contactslist = ({ auth, resource }) => {
             <div className="py-2">
                 <div className="w-[100%] mx-auto p-1 flex flex-row flex-wrap justify-center items-center min-h-full">
                     {resource.map((contact) => (
-                        <div className=" bg-white shadow-lg rounded-md sm:w-[100%] md:w-[30%] p-5 m-3">
+                        <div
+                            key={contact.id}
+                            className=" bg-white shadow-lg rounded-md sm:w-[100%] md:w-[30%] p-5 m-3"
+                        >
                             <div className="flex flex-row justify-between">
                                 <div>
                                     {" "}
@@ -58,8 +61,18 @@ const Contactslist = ({ auth, resource }) => {
                                 </div>
                             </div>
                             <div className="text-center mt-5 flex flex-row justify-evenly">
-                                <Editbutton>Edit</Editbutton>
-                                <Deletebutton>Delete</Deletebutton>
+                                <Editbutton
+                                    id={contact.id}
+                                    onClick={editRecord}
+                                >
+                                    Edit
+                                </Editbutton>
+                                <Deletebutton
+                                    id={contact.id}
+                                    onClick={destroyRecord}
+                                >
+                                    Delete
+                                </Deletebutton>
                             </div>
                         </div>
                     ))}

@@ -3,30 +3,30 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import ContactForm from "./ContactForm";
 
-const Createcontact = ({ auth, saveButton }) => {
+const Createcontact = ({ auth, saveButton, contactsList, record }) => {
     const { data, setData, post, processing, errors } = useForm({
-        contype: "",
-        title: "",
-        fullname: "",
-        designation: "",
-        cname: "",
-        pan: "",
-        gst: "",
-        phone: "",
-        mobile: "",
-        altnum: "",
-        whatsapp: "",
-        emailid: "",
-        altemail: "",
-        weburl: "",
-        town: "",
-        country: "",
-        avatar: "",
-        status: "",
-        houseaddress: "",
-        officeaddress: "",
-        paddress: "",
-        bankdetails: "",
+        contype: record.contype,
+        title: record.title,
+        fullname: record.fullname,
+        designation: record.designation,
+        cname: record.cname,
+        pan: record.pan,
+        gst: record.gst,
+        phone: record.phone,
+        mobile: record.mobile,
+        altnum: record.altnum,
+        whatsapp: record.whatsapp,
+        emailid: record.emailid,
+        altemail: record.altemail,
+        weburl: record.weburl,
+        town: record.town,
+        country: record.country,
+        avatar: record.avatar,
+        status: record.status,
+        houseaddress: record.houseaddress,
+        officeaddress: record.officeaddress,
+        paddress: record.paddress,
+        bankdetails: record.bankdetails,
     });
 
     const submitHandler = (e) => {
@@ -43,6 +43,7 @@ const Createcontact = ({ auth, saveButton }) => {
                         <div className="grid grid-cols-8 gap-4 p-6">
                             <div className="col-start-1 col-end-8">
                                 <ContactForm
+                                    record={record}
                                     data={data}
                                     setData={setData}
                                     saveButton={"Add"}

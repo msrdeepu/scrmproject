@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 class ContactController extends Controller
 {
@@ -57,9 +58,16 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Contact $contact)
+    public function edit(Contact $contact, $id)
     {
-        //
+        $user = Auth::user();
+        $contacts = Contact::get(['id', 'contype', 'title', 'fullname', 'designation', 'cname', 'pan', 'gst', 'phone', 'mobile', 'altnum', 'whatsapp', 'emailid', 'altemail', 'weburl', 'town', 'country', 'avatar', 'status', 'houseaddress', 'officeaddress', 'paddress', 'bankdetails']);
+        $contact= Contact::find($id);
+        return Inertia::render('Contact/Createcontact', [
+            'user' => $user,
+            'contactsList' => $contacts,
+            'record' => $contact,
+        ]);
     }
 
     /**
@@ -73,8 +81,16 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $contact)
+    public function destroy(Contact $contact, $id)
     {
-        //
+        $contact = Contact::find($id);
+
+        if ($contact->avatar !="") {
+            Storage::delete('public' . $contact->avatar);
+        }
+
+        $contact->delete();
+
+        return to_route('contacts.index');
     }
 }

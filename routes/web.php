@@ -45,6 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/scrm-contacts', [ContactController::class, 'index'])->name('contacts.index');
     Route::get('/scrm-contacts/create', [ContactController::class, 'create'])->name('contacts.create');
     Route::post('/scrm-contacts/store', [ContactController::class, 'store'])->name('contacts.store');
+    Route::get('/scrm-contacts/{id}/edit',[ContactController::class, 'edit'])->name('contacts.edit');
+    Route::delete('/scrm-contacts/{id}', [ContactController::class, 'destroy']) -> name('contacts.destroy');
 });
 
 require __DIR__.'/auth.php';
