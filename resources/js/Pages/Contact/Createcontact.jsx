@@ -3,7 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import ContactForm from "./ContactForm";
 
-const Createcontact = ({ auth, saveButton, contactsList, record }) => {
+const Createcontact = ({ auth, saveButton, record }) => {
     const { data, setData, post, processing, errors, patch } = useForm({
         contype: record.contype,
         title: record.title,

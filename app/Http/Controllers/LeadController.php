@@ -23,7 +23,7 @@ class LeadController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Leads/Createlead');
     }
 
     /**
@@ -31,7 +31,12 @@ class LeadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        $requestData = $request->all();
+        $data= Lead::create($requestData);
+        $data->save();
+
+        return to_route('leads.index');
     }
 
     /**
@@ -47,7 +52,7 @@ class LeadController extends Controller
      */
     public function edit(Lead $lead)
     {
-        //
+        return Inertia::render('Leads/Createlead');
     }
 
     /**

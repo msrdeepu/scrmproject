@@ -15,7 +15,11 @@ const Leadslist = ({ auth }) => {
 
             <div className="py-2">
                 <div className="w-[100%] mx-auto p-4 flex flex-row flex-wrap justify-center">
-                    <div className="w-[20%] flex flex-col p-4 max-h-[50vh] bg-white m-2 mr-6 rounded-md shadow-md">
+                    <div className="sm:w-[70%] m-2 ml-6 md:w-[20%] flex flex-col p-4 max-h-[50vh] bg-white md:mr-6 rounded-md shadow-md">
+                        <img
+                            className="sm:h-[80px] md:h-[auto]"
+                            src="https://dgbits.in/images/logo-dgbits.svg"
+                        />
                         <h4 className="mt-2 mb-3">Search Leads Here</h4>
                         <input
                             type="search"
@@ -23,9 +27,20 @@ const Leadslist = ({ auth }) => {
                             placeholder="Search Leads"
                         />
                         <h4 className="mt-5">Add New Lead</h4>
-                        <Addbutton>Add New</Addbutton>
+                        <Link
+                            className="pt-2 pb-2"
+                            href={window.route("leads.create")}
+                            type="button"
+                        >
+                            <button className="w-[100%] bg-purple-600 h-[150%] rounded-md text-white font-bold">
+                                Add New
+                            </button>
+                        </Link>
                     </div>
                     <div className="w-[70%] flex flex-col p-4 bg-white m-2 ml-6 rounded-md shadow-md max-h-[90vh] overflow-y-scroll">
+                        <h3 className="text-2xl text-orange-500 font-serif font-bold">
+                            Lead Management
+                        </h3>
                         ecimen book.What is Lorem Ipsum? Lorem Ipsum is simply
                         dummy text of the printing and typesetting industry.
                         Lorem Ipsum has been the industry's standard dummy text

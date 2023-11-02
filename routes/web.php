@@ -52,6 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/scrm-contacts/{id}', [ContactController::class, 'destroy']) -> name('contacts.destroy');
 
     Route::get('/scrm-leads', [LeadController::class, 'index'])->name('leads.index');
+    Route::get('/scrm-leads/create', [LeadController::class, 'create'])->name('leads.create');
+    Route::post('/scrm-leads/store', [LeadController::class, 'store'])->name('leads.store');
 });
 
 require __DIR__.'/auth.php';
