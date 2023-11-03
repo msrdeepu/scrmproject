@@ -15,7 +15,10 @@ class LeadController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Leads/Leadslist');
+        $resource = Lead::get(['*', 'id AS key']);
+        return Inertia::render('Leads/Leadslist', [
+            'resource' => $resource,
+        ]);
     }
 
     /**
@@ -23,7 +26,9 @@ class LeadController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Leads/Createlead');
+        return Inertia::render('Leads/Createlead', [
+            'record'=> new Lead(),
+        ]);
     }
 
     /**
@@ -50,24 +55,35 @@ class LeadController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Lead $lead)
+    public function edit(Lead $lead, $id)
     {
-        return Inertia::render('Leads/Createlead');
+        $user = Auth::user();
+        $leads = Lead::get(['id', 'title', 'lowner', 'lmanager', 'lsource', 'lindustry', 'lstatus', 'lrating', 'contdate', 'arevenue', 'remind', 'otherdetails', 'fullname', 'cname']);
+        $lead= Lead::find($id);
+        return Inertia::render('Leads/Createlead', [
+            'user' => $user,
+            'leadssList' => $leads,
+            'record' => $lead,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Lead $lead)
+    public function update(Request $request, $id)
     {
-        //
+        $lead = Lead::find($id);
+        $requestData = $request->all();
+        $updated=$lead->update($requestData);
+        return to_route('leads.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Lead $lead)
+    public function destroy($id)
     {
-        //
+        Lead::find($id)->delete();
+        return to_route('leads.index');
     }
 }

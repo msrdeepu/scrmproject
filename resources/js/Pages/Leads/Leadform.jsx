@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 //form components
 import Forminput from "@/Components/Customcomponents/FormItems/Forminut";
 import JoditEditor from "jodit-react";
 
 const Leadform = ({ data, setData, saveButton, submitHandler }) => {
     const [detailsContent, setdetailsContent] = useState("");
-    const handleRichEditor = (e) => {
-        //setData("otherdetails", e.target.value);
-    };
+
     return (
         <div className="py-2">
             <div className="w-[100%] mx-auto p-4 flex flex-row flex-wrap justify-center">
@@ -47,6 +45,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                     }
                                     id="title"
                                     placeholder="Enter Title"
+                                    value={data.title}
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[50%] m-3">
@@ -59,6 +58,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                     onChange={(e) =>
                                         setData("lowner", e.target.value)
                                     }
+                                    value={data.lowner}
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
                                     placeholder="Select Contact Type"
                                 >
@@ -79,7 +79,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 <br />
                                 <select
                                     id="leadManager"
-                                    //value={data.lmanager}
+                                    value={data.lmanager}
                                     onChange={(e) =>
                                         setData("lmanager", e.target.value)
                                     }
@@ -101,7 +101,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 <br />
                                 <select
                                     id="leadsource"
-                                    //value={data.lsource}
+                                    value={data.lsource}
                                     onChange={(e) =>
                                         setData("lsource", e.target.value)
                                     }
@@ -125,7 +125,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 <br />
                                 <select
                                     id="industrytype"
-                                    //value={data.lindustry}
+                                    value={data.lindustry}
                                     onChange={(e) =>
                                         setData("lindustry", e.target.value)
                                     }
@@ -147,7 +147,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 <br />
                                 <select
                                     id="status"
-                                    //value={data.lstatus}
+                                    value={data.lstatus}
                                     onChange={(e) =>
                                         setData("lstatus", e.target.value)
                                     }
@@ -171,7 +171,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 <br />
                                 <select
                                     id="rating"
-                                    //value={data.lrating}
+                                    value={data.lrating}
                                     onChange={(e) =>
                                         setData("lrating", e.target.value)
                                     }
@@ -192,7 +192,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                     id="date"
                                     type="date"
                                     placeholder="Enter Title"
-                                    //value={data.contdate}
+                                    value={data.contdate}
                                     onChange={(e) =>
                                         setData("contdate", e.target.value)
                                     }
@@ -204,7 +204,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 <label htmlFor="revenue">Annual Revenue</label>
                                 <Forminput
                                     id="revenue"
-                                    //value={data.arevenue}
+                                    value={data.arevenue}
                                     onChange={(e) =>
                                         setData("arevenue", e.target.value)
                                     }
@@ -214,9 +214,10 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                             <div className="sm:w-[100%] md:w-[50%] m-3">
                                 <label className="mr-3">Set Reminder</label>
                                 <input
+                                    checked={data.remind == "1" ? true : false}
                                     type="checkbox"
                                     className="rounded-sm"
-                                    //value={""}
+                                    value={data.remind}
                                     placeholder="Enter Title"
                                     onChange={(e) =>
                                         setData("remind", e.target.checked)
@@ -232,7 +233,12 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 </label>
                                 <JoditEditor
                                     id="others"
-                                    value={detailsContent}
+                                    //value={data.otherdetails}
+                                    value={
+                                        data.otherdetails == undefined
+                                            ? detailsContent
+                                            : data.otherdetails
+                                    }
                                     onBlur={(newContent) =>
                                         setdetailsContent(newContent)
                                     }
@@ -248,9 +254,15 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 {saveButton}
                             </button>
 
-                            <button className="m-3 bg-red-500 w-[150px] h-[50px] text-white font-bold rounded-sm">
-                                Cancel
-                            </button>
+                            <Link
+                                className="pt-2 pb-2"
+                                href={window.route("leads.index")}
+                                type="button"
+                            >
+                                <button className="m-3 bg-red-500 w-[150px] h-[50px] text-white font-bold rounded-sm">
+                                    Cancel
+                                </button>
+                            </Link>
                         </div>
                     </form>
                 </div>

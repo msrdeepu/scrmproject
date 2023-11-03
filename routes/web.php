@@ -54,6 +54,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/scrm-leads', [LeadController::class, 'index'])->name('leads.index');
     Route::get('/scrm-leads/create', [LeadController::class, 'create'])->name('leads.create');
     Route::post('/scrm-leads/store', [LeadController::class, 'store'])->name('leads.store');
+    Route::get('/scrm-leads/{id}/edit',[LeadController::class, 'edit'])->name('leads.edit');
+    Route::patch('/scrm-leads/{id}', [LeadController::class, 'update'])->name('leads.update');
+    Route::delete('/scrm-leads/{id}', [LeadController::class, 'destroy']) -> name('leads.destroy');
 });
 
 require __DIR__.'/auth.php';

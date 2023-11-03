@@ -21,7 +21,7 @@ const Contactslist = ({ auth, resource }) => {
     }
     return (
         <AuthenticatedLayout user={auth.user}>
-            {console.log(resource)}
+            {/* {console.log(resource)} */}
             <Head title="Dashboard" />
             <div className="bg-white h-[55px] flex flex-row justify-evenly items-center">
                 <Searchinput type="search" placeholder="Search"></Searchinput>
