@@ -5,6 +5,7 @@ use App\Http\Controllers\OverviewController;
 use App\Http\Controllers\MediamanagerController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LeadController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -57,6 +58,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/scrm-leads/{id}/edit',[LeadController::class, 'edit'])->name('leads.edit');
     Route::patch('/scrm-leads/{id}', [LeadController::class, 'update'])->name('leads.update');
     Route::delete('/scrm-leads/{id}', [LeadController::class, 'destroy']) -> name('leads.destroy');
+
+    Route::get('/scrm-settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::get('/scrm-settings/create', [SettingController::class, 'create'])->name('settings.create');
+    Route::post('/scrm-settings/store', [SettingController::class, 'store'])->name('settings.store');
+    Route::get('/scrm-settings/{id}/edit',[SettingController::class, 'edit'])->name('settings.edit');
+    Route::patch('/scrm-settings/{id}', [SettingController::class, 'update'])->name('settings.update');
+    Route::delete('/scrm-settings/{id}', [SettingController::class, 'destroy']) -> name('settings.destroy');
 });
 
 require __DIR__.'/auth.php';
