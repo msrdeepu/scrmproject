@@ -3,19 +3,19 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import SettingForm from "./SettingForm";
 
-const Createlead = ({ auth, saveButton, record }) => {
+const Createlead = ({ auth, saveButton, record, settingsList }) => {
     const { data, setData, post, processing, errors, patch } = useForm({
-        type: "",
-        name: "",
-        value: "",
-        pcode: "",
-        dorder: "",
-        status: "",
+        type: record.type,
+        name: record.name,
+        value: record.value,
+        pcode: record.pcode,
+        dorder: record.dorder,
+        status: record.status,
     });
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(data);
-        //post("/scrm-settings/store");
+        post("/scrm-settings/store");
     };
 
     //update form submission
@@ -28,12 +28,11 @@ const Createlead = ({ auth, saveButton, record }) => {
             <SettingForm
                 data={data}
                 setData={setData}
-                saveButton="Save"
-                //saveButton={record.title == undefined ? "Add" : "Save"}
-                submitHandler={submitHandler}
-                // submitHandler={
-                //     record.title == undefined ? submitHandler : updateHandler
-                // }
+                record={record}
+                saveButton={record.type == undefined ? "Add" : "Save"}
+                submitHandler={
+                    record.type == undefined ? submitHandler : updateHandler
+                }
             />
         </AuthenticatedLayout>
     );

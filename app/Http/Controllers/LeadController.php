@@ -38,7 +38,7 @@ class LeadController extends Controller
     {
         //dd($request);
         $requestData = $request->all();
-        $data= Lead::create($requestData);
+        $data = Lead::create($requestData);
         $data->save();
 
         return to_route('leads.index');

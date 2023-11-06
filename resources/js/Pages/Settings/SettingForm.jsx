@@ -3,7 +3,7 @@ import { Head, Link, router } from "@inertiajs/react";
 //form components
 import Forminput from "@/Components/Customcomponents/FormItems/Forminut";
 
-const Leadform = ({ data, setData, saveButton, submitHandler }) => {
+const Leadform = ({ data, setData, saveButton, submitHandler, record }) => {
     return (
         <div className="py-2">
             <div className="w-[100%] mx-auto p-4 flex flex-row flex-wrap justify-center">
@@ -44,7 +44,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                     onChange={(e) =>
                                         setData("type", e.target.value)
                                     }
-                                    // value={data.type}
+                                    value={data.type}
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
                                     placeholder="Select Contact Type"
                                 >
@@ -56,6 +56,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                     <option>Intern</option>
                                 </select>
                             </div>
+
                             <div className="sm:w-[100%] md:w-[50%] m-3">
                                 <label htmlFor="name">Name</label>
                                 <Forminput
@@ -64,7 +65,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                     }
                                     id="name"
                                     placeholder="Enter Name"
-                                    //value={data.name}
+                                    value={data.name}
                                 />
                             </div>
                         </div>
@@ -78,7 +79,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                     }
                                     id="value"
                                     placeholder="Enter Value"
-                                    //value={data.value}
+                                    value={data.value}
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[50%] m-3">
@@ -89,7 +90,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                     }
                                     id="pcode"
                                     placeholder="Enter Parent Code"
-                                    //value={data.title}
+                                    value={data.pcode}
                                 />
                             </div>
                         </div>
@@ -97,12 +98,13 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                             <div className="sm:w-[100%] md:w-[50%] m-3">
                                 <label htmlFor="dorder">Display Order</label>
                                 <Forminput
+                                    type="number"
                                     onChange={(e) =>
                                         setData("dorder", e.target.value)
                                     }
                                     id="dorder"
                                     placeholder="Enter Display Order"
-                                    //value={data.title}
+                                    value={data.dorder}
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[50%] m-3">
@@ -115,7 +117,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                     onChange={(e) =>
                                         setData("status", e.target.value)
                                     }
-                                    // value={data.lowner}
+                                    value={data.status}
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
                                     placeholder="Select Status"
                                 >

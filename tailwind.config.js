@@ -1,5 +1,6 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 import forms from "@tailwindcss/forms";
+const windmill = require("@windmill/react-ui/config");
 
 /** @type {import('tailwindcss').Config} */
 export default {
