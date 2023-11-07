@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 class ContactController extends Controller
@@ -14,8 +15,9 @@ class ContactController extends Controller
     public function index()
     {
         $resource = Contact::get(['*', 'id AS key']);
+      
         return Inertia::render('Contact/Contactslist', [
-            'resource' => $resource,
+            'resource' => $resource
         ]);
     }
 
@@ -25,8 +27,10 @@ class ContactController extends Controller
     public function create()
     {
         $user = Auth::user();
+        $ctype = Setting::where('type', '=', 'LIST')->where('name', '=', 'ctype')->get(['name AS label', 'value', 'id AS key']);
         return Inertia::render('Contact/Createcontact', [
             'record'=> new Contact(),
+            'ctype' => $ctype,
         ]);
     }
 

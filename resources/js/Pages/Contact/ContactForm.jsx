@@ -3,7 +3,14 @@ import { Head, Link } from "@inertiajs/react";
 //form components
 import Forminput from "@/Components/Customcomponents/FormItems/Forminut";
 
-const ContactForm = ({ saveButton, data, setData, submitHandler, record }) => {
+const ContactForm = ({
+    saveButton,
+    data,
+    setData,
+    submitHandler,
+    record,
+    ctype,
+}) => {
     let avatar = "";
     if (record.avatar != null) {
         avatar = (
@@ -40,12 +47,20 @@ const ContactForm = ({ saveButton, data, setData, submitHandler, record }) => {
                             className="w-[100%] rounded m-3"
                             placeholder="Select Contact Type"
                         >
+                            {console.log(ctype)}
                             <option>Select Contact Type</option>
-                            <option>Business</option>
-                            <option>Client</option>
+                            {/* <option>{ctype}</option> */}
+                            {ctype.map(function (data) {
+                                return (
+                                    <option key={data.value}>
+                                        {data.value}
+                                    </option>
+                                );
+                            })}
+                            {/* <option>Client</option>
                             <option>Business Lead</option>
                             <option>Student</option>
-                            <option>Intern</option>
+                            <option>Intern</option> */}
                         </select>
                     </div>
                     <div className="sm:col-start-1 md:col-start-4 md:col-end-6">

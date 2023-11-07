@@ -40,7 +40,7 @@ class ActivityController extends Controller
         $data = Activity::create($requestData);
         $data->save();
 
-        return to_route('activity.index');
+        return to_route('leads.index');
     }
 
     /**

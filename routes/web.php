@@ -67,12 +67,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/scrm-settings/{id}', [SettingController::class, 'update'])->name('settings.update');
     Route::delete('/scrm-settings/{id}', [SettingController::class, 'destroy']) -> name('settings.destroy');
 
-    Route::get('/scrm-activity', [SettingController::class, 'index'])->name('activity.index');
-    Route::get('/scrm-activity/create', [SettingController::class, 'create'])->name('activity.create');
-    Route::post('/scrm-activity/store', [SettingController::class, 'store'])->name('activity.store');
-    Route::get('/scrm-activity/{id}/edit',[SettingController::class, 'edit'])->name('activity.edit');
-    Route::patch('/scrm-activity/{id}', [SettingController::class, 'update'])->name('activity.update');
-    Route::delete('/scrm-activity/{id}', [SettingController::class, 'destroy']) -> name('activity.destroy');
+    Route::get('/scrm-activity', [ActivityController::class, 'index'])->name('activity.index');
+    Route::get('/scrm-activity/create', [ActivityController::class, 'create'])->name('activity.create');
+    Route::post('/scrm-activity/store', [ActivityController::class, 'store'])->name('activity.store');
+    Route::get('/scrm-activity/{id}/edit',[ActivityController::class, 'edit'])->name('activity.edit');
+    Route::patch('/scrm-activity/{id}', [ActivityController::class, 'update'])->name('activity.update');
+    Route::delete('/scrm-activity/{id}', [ActivityController::class, 'destroy']) -> name('activity.destroy');
 });
 
 require __DIR__.'/auth.php';

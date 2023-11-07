@@ -49,7 +49,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler, record }) => {
                                     placeholder="Select Contact Type"
                                 >
                                     <option>Select Type</option>
-                                    <option>Business</option>
+                                    <option>LIST</option>
                                     <option>Client</option>
                                     <option>Business Lead</option>
                                     <option>Student</option>
@@ -122,11 +122,8 @@ const Leadform = ({ data, setData, saveButton, submitHandler, record }) => {
                                     placeholder="Select Status"
                                 >
                                     <option>Select Status</option>
-                                    <option>Business</option>
-                                    <option>Client</option>
-                                    <option>Business Lead</option>
-                                    <option>Student</option>
-                                    <option>Intern</option>
+                                    <option>Active</option>
+                                    <option>Inactive</option>
                                 </select>
                             </div>
                         </div>

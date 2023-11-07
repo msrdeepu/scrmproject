@@ -157,9 +157,16 @@ const Leadslist = ({ auth, resource }) => {
                                         >
                                             Edit
                                         </button>
-                                        <button className="m-2 bg-blue-500 w-[auto] pl-2 pr-2 h-[30px] text-white font-bold shadow-md rounded">
-                                            Manage Activity
-                                        </button>
+                                        <Link
+                                            href={window.route(
+                                                "activity.index"
+                                            )}
+                                            type="button"
+                                        >
+                                            <button className="m-2 bg-blue-500 w-[auto] pl-2 pr-2 h-[30px] text-white font-bold shadow-md rounded">
+                                                Manage Activity
+                                            </button>
+                                        </Link>
                                         <button
                                             id={lead.id}
                                             onClick={destroyRecord}
