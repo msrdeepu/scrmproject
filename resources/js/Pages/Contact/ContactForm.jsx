@@ -57,10 +57,6 @@ const ContactForm = ({
                                     </option>
                                 );
                             })}
-                            {/* <option>Client</option>
-                            <option>Business Lead</option>
-                            <option>Student</option>
-                            <option>Intern</option> */}
                         </select>
                     </div>
                     <div className="sm:col-start-1 md:col-start-4 md:col-end-6">
