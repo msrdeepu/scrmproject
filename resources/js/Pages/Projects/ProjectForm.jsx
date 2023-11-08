@@ -179,7 +179,7 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                             </div>
                         </div>
                         <div className="flex sm:flex-col md:flex-row justify-center items-center">
-                            <div className="sm:w-[100%] md:w-[50%] m-3">
+                            <div className="sm:w-[100%] md:w-[100%] m-3">
                                 <label htmlFor="dueDate">Due Date</label>
                                 <Forminput
                                     id="dueDate"
@@ -187,19 +187,6 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                     // value={data.contdate}
                                     // onChange={(e) =>
                                     //     setData("contdate", e.target.value)
-                                    // }
-                                />
-                            </div>
-                            <div className="sm:w-[100%] md:w-[50%] m-3">
-                                <label className="mr-3">Set Reminder</label>
-                                <input
-                                    // checked={data.remind == "1" ? true : false}
-                                    type="checkbox"
-                                    className="rounded-sm"
-                                    // value={data.remind}
-                                    placeholder="Enter Title"
-                                    // onChange={(e) =>
-                                    //     setData("remind", e.target.checked)
                                     // }
                                 />
                             </div>
