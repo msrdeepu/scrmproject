@@ -16,6 +16,7 @@ const Activityist = ({ auth, resource }) => {
     });
 
     const [detailsContent, setdetailsContent] = useState("");
+    const [remindComponents, setRemindComponents] = useState();
 
     const remindHandler = (e) => {
         if (e.target.checked) {
@@ -210,7 +211,7 @@ const Activityist = ({ auth, resource }) => {
                         {/* timeline */}
                         <>
                             <h3 className="mb-6 ml-3 text-2xl font-bold text-neutral-700 dark:text-neutral-300">
-                                Latest News
+                                Lead Activity Timeline
                             </h3>
 
                             <ol className="border-l-2 border-info-100">
