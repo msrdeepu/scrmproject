@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -73,6 +74,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/scrm-activity/{id}/edit',[ActivityController::class, 'edit'])->name('activity.edit');
     Route::patch('/scrm-activity/{id}', [ActivityController::class, 'update'])->name('activity.update');
     Route::delete('/scrm-activity/{id}', [ActivityController::class, 'destroy']) -> name('activity.destroy');
+
+
+    Route::get('/scrm-projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('/scrm-projects/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('/scrm-projects/store', [ProjectController::class, 'store'])->name('projects.store');
+    Route::get('/scrm-projects/{id}/edit',[ProjectController::class, 'edit'])->name('projects.edit');
+    Route::patch('/scrm-projects/{id}', [ProjectController::class, 'update'])->name('projects.update');
+    Route::delete('/scrm-projects/{id}', [ProjectController::class, 'destroy']) -> name('projects.destroy');
 });
 
 require __DIR__.'/auth.php';

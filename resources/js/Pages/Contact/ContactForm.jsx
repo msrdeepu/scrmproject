@@ -49,7 +49,6 @@ const ContactForm = ({
                         >
                             {console.log(ctype)}
                             <option>Select Contact Type</option>
-                            {/* <option>{ctype}</option> */}
                             {ctype.map(function (data) {
                                 return (
                                     <option key={data.value}>
