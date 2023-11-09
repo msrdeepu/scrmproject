@@ -3,7 +3,14 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import SettingForm from "./SettingForm";
 
-const Createlead = ({ auth, saveButton, record, settingsList }) => {
+const Createlead = ({
+    auth,
+    saveButton,
+    record,
+    settingsList,
+    stype,
+    sstatus,
+}) => {
     const { data, setData, post, processing, errors, patch } = useForm({
         type: record.type,
         name: record.name,
@@ -26,12 +33,14 @@ const Createlead = ({ auth, saveButton, record, settingsList }) => {
     return (
         <AuthenticatedLayout user={auth.user}>
             <SettingForm
+                stype={stype}
+                sstatus={sstatus}
                 data={data}
                 setData={setData}
                 record={record}
-                saveButton={record.type == undefined ? "Add" : "Save"}
+                saveButton={record.value == undefined ? "Add" : "Save"}
                 submitHandler={
-                    record.type == undefined ? submitHandler : updateHandler
+                    record.value == undefined ? submitHandler : updateHandler
                 }
             />
         </AuthenticatedLayout>

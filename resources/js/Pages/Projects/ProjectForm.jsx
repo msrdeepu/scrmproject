@@ -40,12 +40,12 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                             <div className="sm:w-[100%] md:w-[50%] m-3">
                                 <label htmlFor="ptitle">Project Title</label>
                                 <Forminput
-                                    // onChange={(e) =>
-                                    //     setData("title", e.target.value)
-                                    // }
+                                    onChange={(e) =>
+                                        setData("ptitle", e.target.value)
+                                    }
                                     id="ptitle"
                                     placeholder="Enter Project Title"
-                                    //value={data.title}
+                                    value={data.ptitle}
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[50%] m-3">
@@ -54,11 +54,11 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 </label>
                                 <br />
                                 <select
-                                    id="leadOwner"
-                                    // onChange={(e) =>
-                                    //     setData("lowner", e.target.value)
-                                    // }
-                                    // value={data.lowner}
+                                    id="pstatus"
+                                    onChange={(e) =>
+                                        setData("pstatus", e.target.value)
+                                    }
+                                    value={data.pstatus}
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
                                     placeholder="Select Contact Type"
                                 >
@@ -73,16 +73,16 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                         </div>
                         <div className="flex sm:flex-col md:flex-row justify-center items-center">
                             <div className="sm:w-[100%] md:w-[50%] m-3">
-                                <label className="" htmlFor="leadManager">
+                                <label className="" htmlFor="priority">
                                     Project Priority
                                 </label>
                                 <br />
                                 <select
-                                    id="leadManager"
-                                    // value={data.lmanager}
-                                    // onChange={(e) =>
-                                    //     setData("lmanager", e.target.value)
-                                    // }
+                                    id="priority"
+                                    value={data.priority}
+                                    onChange={(e) =>
+                                        setData("priority", e.target.value)
+                                    }
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
                                     placeholder="Select Contact Type"
                                 >
@@ -95,16 +95,16 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 </select>
                             </div>
                             <div className="sm:w-[100%] md:w-[50%] m-3">
-                                <label htmlFor="leadsource" className="">
+                                <label htmlFor="pcustomer" className="">
                                     Customer
                                 </label>
                                 <br />
                                 <select
-                                    id="leadsource"
-                                    // value={data.lsource}
-                                    // onChange={(e) =>
-                                    //     setData("lsource", e.target.value)
-                                    // }
+                                    id="pcustomer"
+                                    value={data.pcustomer}
+                                    onChange={(e) =>
+                                        setData("pcustomer", e.target.value)
+                                    }
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
                                     placeholder="Select Contact Type"
                                 >
@@ -124,11 +124,11 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 </label>
                                 <br />
                                 <select
-                                    id="industrytype"
-                                    // value={data.lindustry}
-                                    // onChange={(e) =>
-                                    //     setData("lindustry", e.target.value)
-                                    // }
+                                    id="paemploye"
+                                    value={data.paemploye}
+                                    onChange={(e) =>
+                                        setData("paemploye", e.target.value)
+                                    }
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
                                     placeholder="Select Contact Type"
                                 >
@@ -143,13 +143,13 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                             <div className="sm:w-[100%] md:w-[50%] m-3">
                                 <label htmlFor="budget">Project Budget</label>
                                 <Forminput
-                                    // onChange={(e) =>
-                                    //     setData("title", e.target.value)
-                                    // }
+                                    onChange={(e) =>
+                                        setData("pbudget", e.target.value)
+                                    }
                                     id="budget"
                                     placeholder="Enter Project Budget"
                                     type="number"
-                                    //value={data.title}
+                                    value={data.pbudget}
                                 />
                             </div>
                         </div>
@@ -157,13 +157,13 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                             <div className="sm:w-[100%] md:w-[50%] m-3">
                                 <label htmlFor="budget">Project Phase</label>
                                 <Forminput
-                                    // onChange={(e) =>
-                                    //     setData("title", e.target.value)
-                                    // }
+                                    onChange={(e) =>
+                                        setData("pphase", e.target.value)
+                                    }
                                     id="budget"
                                     placeholder="Enter Project Phase"
                                     type="text"
-                                    //value={data.title}
+                                    value={data.pphase}
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[50%] m-3">
@@ -171,10 +171,10 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 <Forminput
                                     id="startDate"
                                     type="date"
-                                    // value={data.contdate}
-                                    // onChange={(e) =>
-                                    //     setData("contdate", e.target.value)
-                                    // }
+                                    value={data.startdate}
+                                    onChange={(e) =>
+                                        setData("startdate", e.target.value)
+                                    }
                                 />
                             </div>
                         </div>
@@ -184,10 +184,10 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 <Forminput
                                     id="dueDate"
                                     type="date"
-                                    // value={data.contdate}
-                                    // onChange={(e) =>
-                                    //     setData("contdate", e.target.value)
-                                    // }
+                                    value={data.duedate}
+                                    onChange={(e) =>
+                                        setData("duedate", e.target.value)
+                                    }
                                 />
                             </div>
                         </div>
@@ -199,18 +199,17 @@ const Leadform = ({ data, setData, saveButton, submitHandler }) => {
                                 </label>
                                 <JoditEditor
                                     id="others"
-                                    //value={data.otherdetails}
-                                    // value={
-                                    //     data.otherdetails == undefined
-                                    //         ? detailsContent
-                                    //         : data.otherdetails
-                                    // }
-                                    // onBlur={(newContent) =>
-                                    //     setdetailsContent(newContent)
-                                    // }
-                                    // onChange={(newContent) =>
-                                    //     setData("otherdetails", newContent)
-                                    // }
+                                    value={
+                                        data.details == undefined
+                                            ? detailsContent
+                                            : data.details
+                                    }
+                                    onBlur={(newContent) =>
+                                        setdetailsContent(newContent)
+                                    }
+                                    onChange={(newContent) =>
+                                        setData("details", newContent)
+                                    }
                                 />
                             </div>
                         </div>

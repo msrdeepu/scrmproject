@@ -3,7 +3,15 @@ import { Head, Link, router } from "@inertiajs/react";
 //form components
 import Forminput from "@/Components/Customcomponents/FormItems/Forminut";
 
-const Leadform = ({ data, setData, saveButton, submitHandler, record }) => {
+const Leadform = ({
+    data,
+    setData,
+    saveButton,
+    submitHandler,
+    record,
+    stype,
+    sstatus,
+}) => {
     return (
         <div className="py-2">
             <div className="w-[100%] mx-auto p-4 flex flex-row flex-wrap justify-center">
@@ -46,14 +54,21 @@ const Leadform = ({ data, setData, saveButton, submitHandler, record }) => {
                                     }
                                     value={data.type}
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
-                                    placeholder="Select Contact Type"
+                                    placeholder="Select Setting Type"
                                 >
                                     <option>Select Type</option>
-                                    <option>LIST</option>
-                                    <option>Client</option>
-                                    <option>Business Lead</option>
-                                    <option>Student</option>
-                                    <option>Intern</option>
+                                    {stype.map(function (data) {
+                                        {
+                                            console.log(stype);
+                                        }
+                                        return (
+                                            <>
+                                                <option key={data.value}>
+                                                    {data.value}
+                                                </option>
+                                            </>
+                                        );
+                                    })}
                                 </select>
                             </div>
 
@@ -122,8 +137,15 @@ const Leadform = ({ data, setData, saveButton, submitHandler, record }) => {
                                     placeholder="Select Status"
                                 >
                                     <option>Select Status</option>
-                                    <option>Active</option>
-                                    <option>Inactive</option>
+                                    {sstatus.map(function (data) {
+                                        return (
+                                            <>
+                                                <option key={data.value}>
+                                                    {data.value}
+                                                </option>
+                                            </>
+                                        );
+                                    })}
                                 </select>
                             </div>
                         </div>

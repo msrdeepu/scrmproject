@@ -28,9 +28,13 @@ class ContactController extends Controller
     {
         $user = Auth::user();
         $ctype = Setting::where('type', '=', 'LIST')->where('name', '=', 'ctype')->get(['name AS label', 'value', 'id AS key']);
+        $ctitle = Setting::where('type', '=', 'LIST')->where('name', '=', 'ctitle')->get(['name AS label', 'value', 'id AS key']);
+        $cstatus = Setting::where('type', '=', 'STATUS')->where('name', '=', 'status')->get(['name AS label', 'value', 'id AS key']);
         return Inertia::render('Contact/Createcontact', [
             'record'=> new Contact(),
             'ctype' => $ctype,
+            'ctitle' => $ctitle,
+            'cstatus' => $cstatus,
         ]);
     }
 
@@ -69,6 +73,9 @@ class ContactController extends Controller
     {
         $user = Auth::user();
         $contacts = Contact::get(['id', 'contype', 'title', 'fullname', 'designation', 'cname', 'pan', 'gst', 'phone', 'mobile', 'altnum', 'whatsapp', 'emailid', 'altemail', 'weburl', 'town', 'country', 'avatar', 'status', 'houseaddress', 'officeaddress', 'paddress', 'bankdetails']);
+        $ctype = Setting::where('type', '=', 'LIST')->where('name', '=', 'ctype')->get(['name AS label', 'value', 'id AS key']);
+        $ctitle = Setting::where('type', '=', 'LIST')->where('name', '=', 'ctitle')->get(['name AS label', 'value', 'id AS key']);
+        $cstatus = Setting::where('type', '=', 'STATUS')->where('name', '=', 'status')->get(['name AS label', 'value', 'id AS key']);
         $contact= Contact::find($id);
         if($contact->avatar != null){
             $contact->avatarPath = asset('storage/'.$contact->avatar);
@@ -77,7 +84,11 @@ class ContactController extends Controller
             'user' => $user,
             'contactsList' => $contacts,
             'record' => $contact,
+            'ctype' => $ctype,
+            'ctitle' => $ctitle,
+            'cstatus' => $cstatus,
         ]);
+     
     }
 
     /**
@@ -95,6 +106,7 @@ class ContactController extends Controller
             $requestData['avatar'] = $avatar;
         }
         $updated=$contact->update($requestData);
+        return to_route('contacts.index');
     }
 
     // delete page assets

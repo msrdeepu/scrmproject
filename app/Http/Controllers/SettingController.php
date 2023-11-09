@@ -26,8 +26,12 @@ class SettingController extends Controller
      */
     public function create()
     {
+        $stype = Setting::where('type', '=', 'LIST')->where('name', '=', 'stype')->get(['name AS label', 'value', 'id AS key']);
+        $sstatus = Setting::where('type', '=', 'STATUS')->where('name', '=', 'status')->get(['name AS label', 'value', 'id AS key']);
         return Inertia::render('Settings/CreateSettings', [
             'record'=> new Setting(),
+            'stype' => $stype,
+            'sstatus' => $sstatus,
         ]);
     }
 
@@ -60,10 +64,14 @@ class SettingController extends Controller
         $user = Auth::user();
         $settings = Setting::get(['id', 'type', 'name', 'value', 'pcode', 'dorder', 'status']);
         $setting= Setting::find($id);
+        $stype = Setting::where('type', '=', 'LIST')->where('name', '=', 'stype')->get(['name AS label', 'value', 'id AS key']);
+        $sstatus = Setting::where('type', '=', 'STATUS')->where('name', '=', 'status')->get(['name AS label', 'value', 'id AS key']);
         return Inertia::render('Settings/CreateSettings', [
             'user' => $user,
             'settingsList' => $settings,
             'record' => $setting,
+            'stype' => $stype,
+            'sstatus' => $sstatus,
         ]);
     }
 

@@ -70,7 +70,6 @@ const Leadslist = ({ auth, resource }) => {
                                     }
                                     alt="avatar"
                                 />
-                                {console.log(resource.length)}
 
                                 <div className="flex flex-col justify-start p-6 w-[100%]">
                                     <h5 className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
@@ -163,7 +162,10 @@ const Leadslist = ({ auth, resource }) => {
                                             )}
                                             type="button"
                                         >
-                                            <button className="m-2 bg-blue-500 w-[auto] pl-2 pr-2 h-[30px] text-white font-bold shadow-md rounded">
+                                            <button
+                                                id={lead.id}
+                                                className="m-2 bg-blue-500 w-[auto] pl-2 pr-2 h-[30px] text-white font-bold shadow-md rounded"
+                                            >
                                                 Manage Activity
                                             </button>
                                         </Link>

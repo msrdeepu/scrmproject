@@ -10,6 +10,8 @@ const ContactForm = ({
     submitHandler,
     record,
     ctype,
+    ctitle,
+    cstatus,
 }) => {
     let avatar = "";
     if (record.avatar != null) {
@@ -69,12 +71,14 @@ const ContactForm = ({
                             value={data.title}
                             onChange={(e) => setData("title", e.target.value)}
                         >
-                            <option>Title</option>
-                            <option>Ms.</option>
-                            <option>Mr.</option>
-                            <option>Mrs.</option>
-                            <option>Miss.</option>
-                            <option>Dr.</option>
+                            <option>Select Title</option>
+                            {ctitle.map(function (data) {
+                                return (
+                                    <option key={data.value}>
+                                        {data.value}
+                                    </option>
+                                );
+                            })}
                         </select>
                     </div>
                     <div className="sm:col-start-1 md:col-start-2 md:col-end-4">
@@ -307,9 +311,14 @@ const ContactForm = ({
                             onChange={(e) => setData("status", e.target.value)}
                             className="m-3 w-[100%] rounded"
                         >
-                            <option>New</option>
-                            <option>Active</option>
-                            <option>Inactive</option>
+                            <option>Select Status</option>
+                            {cstatus.map(function (data) {
+                                return (
+                                    <option key={data.value}>
+                                        {data.value}
+                                    </option>
+                                );
+                            })}
                         </select>
                     </div>
 

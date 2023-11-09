@@ -3,7 +3,14 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import ContactForm from "./ContactForm";
 
-const Createcontact = ({ auth, saveButton, record, ctype }) => {
+const Createcontact = ({
+    auth,
+    saveButton,
+    record,
+    ctype,
+    ctitle,
+    cstatus,
+}) => {
     const { data, setData, post, processing, errors, patch } = useForm({
         contype: record.contype,
         title: record.title,
@@ -51,6 +58,8 @@ const Createcontact = ({ auth, saveButton, record, ctype }) => {
                         <div className="grid grid-cols-8 gap-4 p-6">
                             <div className="col-start-1 col-end-8">
                                 <ContactForm
+                                    cstatus={cstatus}
+                                    ctitle={ctitle}
                                     ctype={ctype}
                                     record={record}
                                     data={data}
