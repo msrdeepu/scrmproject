@@ -8,11 +8,24 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * 
      */
+
+    
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->string('ttype')->nullable();
+            $table->string('tname')->nullable();
+            $table->string('tstatus')->nullable();
+            $table->string('tpriority')->nullable();
+            $table->string('tcategory')->nullable();
+            $table->string('taemploye')->nullable();
+            $table->string('tdemploye')->nullable();
+            $table->string('tsdate')->nullable();
+            $table->string('tddate')->nullable();
+            $table->string('tdetails')->nullable();
             $table->timestamps();
         });
     }

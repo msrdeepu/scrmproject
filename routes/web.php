@@ -8,6 +8,8 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\EstimateController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -75,13 +77,26 @@ Route::middleware('auth')->group(function () {
     Route::patch('/scrm-activity/{id}', [ActivityController::class, 'update'])->name('activity.update');
     Route::delete('/scrm-activity/{id}', [ActivityController::class, 'destroy']) -> name('activity.destroy');
 
-
     Route::get('/scrm-projects', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/scrm-projects/create', [ProjectController::class, 'create'])->name('projects.create');
     Route::post('/scrm-projects/store', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/scrm-projects/{id}/edit',[ProjectController::class, 'edit'])->name('projects.edit');
     Route::patch('/scrm-projects/{id}', [ProjectController::class, 'update'])->name('projects.update');
     Route::delete('/scrm-projects/{id}', [ProjectController::class, 'destroy']) -> name('projects.destroy');
+
+    Route::get('/scrm-tasks', [TaskController::class, 'index'])->name('tasks.index');
+    Route::get('/scrm-tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+    Route::post('/scrm-tasks/store', [TaskController::class, 'store'])->name('tasks.store');
+    Route::get('/scrm-tasks/{id}/edit',[TaskController::class, 'edit'])->name('tasks.edit');
+    Route::patch('/scrm-tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
+    Route::delete('/scrm-tasks/{id}', [TaskController::class, 'destroy']) -> name('tasks.destroy');
+
+    Route::get('/scrm-estimates', [EstimateController::class, 'index'])->name('estimates.index');
+    Route::get('/scrm-estimates/create', [EstimateController::class, 'create'])->name('estimates.create');
+    Route::post('/scrm-estimates/store', [EstimateController::class, 'store'])->name('estimates.store');
+    Route::get('/scrm-estimates/{id}/edit',[EstimateController::class, 'edit'])->name('estimates.edit');
+    Route::patch('/scrm-estimates/{id}', [EstimateController::class, 'update'])->name('estimates.update');
+    Route::delete('/scrm-estimates/{id}', [EstimateController::class, 'destroy']) -> name('estimates.destroy');
 });
 
 require __DIR__.'/auth.php';
