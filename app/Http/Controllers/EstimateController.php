@@ -14,7 +14,10 @@ class EstimateController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Estimates/Estimatelist');
+        $record = Estimate::get(['*', 'id AS key']);
+        return Inertia::render('Estimates/Estimatelist', [
+            'record' => $record,
+        ]);
     }
 
     /**
@@ -22,7 +25,10 @@ class EstimateController extends Controller
      */
     public function create()
     {
-        //
+        
+        return Inertia::render('Estimates/CreateEstimate', [
+            'record'=> new Estimate(),
+        ]);
     }
 
     /**
@@ -30,7 +36,12 @@ class EstimateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        $requestData = $request->all();
+        $data = Estimate::create($requestData);
+        $data->save();
+
+        return to_route('estimates.index');
     }
 
     /**

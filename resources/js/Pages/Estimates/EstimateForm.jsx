@@ -4,20 +4,36 @@ import { Head, Link, router } from "@inertiajs/react";
 import Forminput from "@/Components/Customcomponents/FormItems/Forminut";
 import JoditEditor from "jodit-react";
 
-// ebclient: "",
-// ebfirm: "",
-// lmanager: "",
-// eid: "",
-// erid: "",
-// esdate: "",
-// esdvalidity: "",
-// eptype: "",
-// eptitle: "",
-// epphase: "",
-// epdetails: "",
-
 const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
     const [detailsContent, setdetailsContent] = useState("");
+
+    //detailed form data submission
+    const [formData, setFormData] = useState([
+        { product: "", quantity: "", price: "" },
+    ]);
+
+    const handleInputChange = (index, event) => {
+        const { name, value } = event.target;
+        const newFormData = [...formData];
+        newFormData[index][name] = value;
+        setFormData(newFormData);
+    };
+
+    const handleAddRow = () => {
+        setFormData([...formData, { product: "", quantity: "", price: "" }]);
+    };
+
+    const handleRemoveRow = (index) => {
+        const newFormData = [...formData];
+        newFormData.splice(index, 1);
+        setFormData(newFormData);
+    };
+
+    const handleSubmit = () => {
+        console.log(formData);
+        submitHandler();
+        // You can send the formData to your server or perform other actions here
+    };
 
     return (
         <div className="py-2">
@@ -38,7 +54,6 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                         <li>Instruction 5</li>
                     </ul>
                     <p className="text-center font-serif">
-                        {" "}
                         <span className="text-red-700 text-2xl">*</span>
                         Read all the instructions carefully
                     </p>
@@ -61,9 +76,9 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                     }
                                     //value={data.ttype}
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
-                                    placeholder="Select Task Type"
+                                    placeholder="Select Client"
                                 >
-                                    <option>Select Lead Owner</option>
+                                    <option>Select Client</option>
                                     <option>Business</option>
                                     <option>Client</option>
                                     <option>Business Lead</option>
@@ -72,120 +87,91 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                 </select>
                             </div>
                             <div className="sm:w-[100%] md:w-[50%] m-3">
-                                <label htmlFor="tname">Task Name</label>
-                                <Forminput
-                                    id="tname"
-                                    //value={data.tname}
+                                <label htmlFor="ebfirm" className="">
+                                    Task Related To
+                                </label>
+                                <br />
+                                <select
+                                    id="ebfirm"
                                     onChange={(e) =>
-                                        setData("tname", e.target.value)
+                                        setData("ebfirm", e.target.value)
                                     }
-                                    placeholder="Enter Task Name"
+                                    //value={data.ttype}
+                                    className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
+                                    placeholder="Select Firm"
+                                >
+                                    <option>Select Billing Firm</option>
+                                    <option>Business</option>
+                                    <option>Client</option>
+                                    <option>Business Lead</option>
+                                    <option>Student</option>
+                                    <option>Intern</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="flex sm:flex-col md:flex-row justify-center items-center">
+                            <div className="sm:w-[100%] md:w-[50%] m-3">
+                                <label htmlFor="eid">Title</label>
+                                <Forminput
+                                    onChange={(e) =>
+                                        setData("eid", e.target.value)
+                                    }
+                                    id="eid"
+                                    placeholder="Estimate ID"
+                                    value={data.title}
+                                />
+                            </div>
+                            <div className="sm:w-[100%] md:w-[50%] m-3">
+                                <label htmlFor="erid">Title</label>
+                                <Forminput
+                                    onChange={(e) =>
+                                        setData("erid", e.target.value)
+                                    }
+                                    id="erid"
+                                    placeholder="Reference ID"
+                                    //value={data.title}
                                 />
                             </div>
                         </div>
                         <div className="flex sm:flex-col md:flex-row justify-center items-center">
                             <div className="sm:w-[100%] md:w-[50%] m-3">
-                                <label className="" htmlFor="leadManager">
-                                    Task Status
-                                </label>
-                                <br />
-                                <select
-                                    id="tstatus"
-                                    value={data.tstatus}
+                                <label htmlFor="esdate">Estimate Date</label>
+                                <Forminput
                                     onChange={(e) =>
-                                        setData("tstatus", e.target.value)
+                                        setData("esdate", e.target.value)
                                     }
-                                    className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
-                                    placeholder="Select Task Status"
-                                >
-                                    <option>Select Lead Manager</option>
-                                    <option>Business</option>
-                                    <option>Client</option>
-                                    <option>Business Lead</option>
-                                    <option>Student</option>
-                                    <option>Intern</option>
-                                </select>
+                                    id="esdate"
+                                    type="date"
+                                    placeholder="Reference ID"
+                                    //value={data.title}
+                                />
                             </div>
                             <div className="sm:w-[100%] md:w-[50%] m-3">
-                                <label htmlFor="tpriority" className="">
-                                    Task Priority
+                                <label htmlFor="esdvalidity">
+                                    Estimate Validity
                                 </label>
-                                <br />
-                                <select
-                                    id="tpriority"
-                                    value={data.tpriority}
+                                <Forminput
                                     onChange={(e) =>
-                                        setData("tpriority", e.target.value)
+                                        setData("esdvalidity", e.target.value)
                                     }
-                                    className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
-                                    placeholder="Select Contact Type"
-                                >
-                                    <option>Select Lead Source</option>
-                                    <option>Business</option>
-                                    <option>Client</option>
-                                    <option>Business Lead</option>
-                                    <option>Student</option>
-                                    <option>Intern</option>
-                                </select>
+                                    id="esdvalidity"
+                                    type="date"
+                                    placeholder="Reference ID"
+                                    //value={data.title}
+                                />
                             </div>
                         </div>
                         <div className="flex sm:flex-col md:flex-row justify-center items-center">
                             <div className="sm:w-[100%] md:w-[50%] m-3">
-                                <label className="" htmlFor="tcategory">
-                                    Task Category
+                                <label className="" htmlFor="eptype">
+                                    Select Project Type
                                 </label>
                                 <br />
                                 <select
-                                    id="tcategory"
-                                    value={data.tcategory}
+                                    id="eptype"
+                                    //value={data.lrating}
                                     onChange={(e) =>
-                                        setData("tcategory", e.target.value)
-                                    }
-                                    className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
-                                    placeholder="Select Contact Type"
-                                >
-                                    <option>Select Lead Industry</option>
-                                    <option>Business</option>
-                                    <option>Client</option>
-                                    <option>Business Lead</option>
-                                    <option>Student</option>
-                                    <option>Intern</option>
-                                </select>
-                            </div>
-                            <div className="sm:w-[100%] md:w-[50%] m-3">
-                                <label htmlFor="taemploye" className="">
-                                    Assigned Employee
-                                </label>
-                                <br />
-                                <select
-                                    id="taemploye"
-                                    value={data.taemploye}
-                                    onChange={(e) =>
-                                        setData("taemploye", e.target.value)
-                                    }
-                                    className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
-                                    placeholder="Select Contact Type"
-                                >
-                                    <option>Select Lead Status</option>
-                                    <option>Business</option>
-                                    <option>Client</option>
-                                    <option>Business Lead</option>
-                                    <option>Student</option>
-                                    <option>Intern</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div className="flex sm:flex-col md:flex-row justify-center items-center">
-                            <div className="sm:w-[100%] md:w-[50%] m-3">
-                                <label className="" htmlFor="tdemploye">
-                                    Deligated Employee
-                                </label>
-                                <br />
-                                <select
-                                    id="tdemploye"
-                                    value={data.lrating}
-                                    onChange={(e) =>
-                                        setData("tdemploye", e.target.value)
+                                        setData("eptype", e.target.value)
                                     }
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
                                     placeholder="Select Contact Type"
@@ -223,44 +209,198 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                         </div>
 
                         <div className="flex sm:flex-col md:flex-row justify-center items-center">
+                            <div className="sm:w-[100%] md:w-[50%] m-3">
+                                <label htmlFor="eptitle">Proposal Title</label>
+                                <Forminput
+                                    onChange={(e) =>
+                                        setData("eptitle", e.target.value)
+                                    }
+                                    id="eptitle"
+                                    placeholder="Proposal Title"
+                                    //value={data.title}
+                                />
+                            </div>
+                            <div className="sm:w-[100%] md:w-[50%] m-3">
+                                <label htmlFor="epphase">Proposal Title</label>
+                                <Forminput
+                                    onChange={(e) =>
+                                        setData("epphase", e.target.value)
+                                    }
+                                    id="epphase"
+                                    placeholder="Phase I, Phase II, Phase III"
+                                    //value={data.title}
+                                />
+                            </div>
+                        </div>
+                        <div className="flex sm:flex-col md:flex-row justify-center items-center">
                             <div className="w-[100%] m-3">
                                 <label htmlFor="others" className="mr-3">
-                                    Details
+                                    Proposal Details
                                 </label>
                                 <JoditEditor
                                     id="others"
                                     //value={data.otherdetails}
-                                    value={
-                                        data.tdetails == undefined
-                                            ? detailsContent
-                                            : data.tdetails
-                                    }
+                                    // value={
+                                    //     data.otherdetails == undefined
+                                    //         ? detailsContent
+                                    //         : data.otherdetails
+                                    // }
+                                    value={detailsContent}
                                     onBlur={(newContent) =>
                                         setdetailsContent(newContent)
                                     }
                                     onChange={(newContent) =>
-                                        setData("tdetails", newContent)
+                                        setData("epdetails", newContent)
                                     }
                                 />
                             </div>
                         </div>
 
-                        <div className="flex flex-row justify-center items-center">
-                            <button className="m-3 bg-green-600 w-[150px] h-[50px] text-white font-bold rounded-sm">
+                        {/* <div className="flex flex-row justify-center items-center">
+                            <button
+                                type="submit"
+                                className="m-3 bg-green-600 w-[150px] h-[50px] text-white font-bold rounded-sm"
+                            >
                                 {saveButton}
                             </button>
 
                             <Link
                                 className="pt-2 pb-2"
-                                href={window.route("tasks.index")}
+                                href={window.route("estimates.index")}
                                 type="button"
                             >
                                 <button className="m-3 bg-red-500 w-[150px] h-[50px] text-white font-bold rounded-sm">
                                     Cancel
                                 </button>
                             </Link>
-                        </div>
+                        </div> */}
                     </form>
+                    <div>
+                        <h1 className="text-center text-3xl mt-4 mb-3 bg-[#034EA2] p-4 text-white rounded-md">
+                            Detailed Estimate
+                        </h1>
+                        {/* detailed form starts */}
+
+                        <form className="flex flex-col justify-center items-center mt-3">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Product or Service Item with
+                                            Description
+                                        </th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Amount</th>
+
+                                        {formData.length > 1 && <th>Action</th>}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {formData.map((row, index) => (
+                                        <tr key={index}>
+                                            <td>
+                                                <Forminput
+                                                    type="text"
+                                                    name="product"
+                                                    value={row.product}
+                                                    onChange={(e) =>
+                                                        handleInputChange(
+                                                            index,
+                                                            e
+                                                        )
+                                                    }
+                                                />
+                                            </td>
+                                            <td>
+                                                <Forminput
+                                                    type="text"
+                                                    name="quantity"
+                                                    value={row.quantity}
+                                                    onChange={(e) =>
+                                                        handleInputChange(
+                                                            index,
+                                                            e
+                                                        )
+                                                    }
+                                                />
+                                            </td>
+                                            <td>
+                                                <Forminput
+                                                    type="text"
+                                                    name="price"
+                                                    value={row.price}
+                                                    onChange={(e) =>
+                                                        handleInputChange(
+                                                            index,
+                                                            e
+                                                        )
+                                                    }
+                                                />
+                                            </td>
+                                            <td>
+                                                <Forminput
+                                                    type="text"
+                                                    name="amount"
+                                                    readOnly
+                                                    value={row.amount}
+                                                    onChange={(e) =>
+                                                        handleInputChange(
+                                                            index,
+                                                            e
+                                                        )
+                                                    }
+                                                />
+                                            </td>
+                                            <td>
+                                                {formData.length > 1 && (
+                                                    <button
+                                                        className="bg-red-500 rounded-md text-white p-2"
+                                                        type="button"
+                                                        onClick={() =>
+                                                            handleRemoveRow(
+                                                                index
+                                                            )
+                                                        }
+                                                    >
+                                                        Remove
+                                                    </button>
+                                                )}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <div className="flex sm:flex-col md:flex-row justify-center items-center">
+                                {" "}
+                                <button
+                                    className="m-3 bg-purple-600 w-[150px] h-[50px] text-white font-bold rounded-sm"
+                                    type="button"
+                                    onClick={handleAddRow}
+                                >
+                                    Add New Row
+                                </button>
+                                <button
+                                    className="m-3 bg-green-600 w-[150px] h-[50px] text-white font-bold rounded-sm"
+                                    type="button"
+                                    onClick={handleSubmit}
+                                >
+                                    Submit
+                                </button>
+                                <Link
+                                    className="pt-2 pb-2"
+                                    href={window.route("estimates.index")}
+                                    type="button"
+                                >
+                                    <button className="m-3 bg-red-500 w-[150px] h-[50px] text-white font-bold rounded-sm">
+                                        Cancel
+                                    </button>
+                                </Link>
+                            </div>
+                        </form>
+
+                        {/* detailed form ends */}
+                    </div>
                 </div>
             </div>
         </div>

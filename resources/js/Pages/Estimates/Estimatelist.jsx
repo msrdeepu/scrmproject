@@ -6,7 +6,7 @@ import { Head, Link, router } from "@inertiajs/react";
 import { AiFillCopy, AiFillPrinter, AiFillDelete } from "react-icons/ai";
 import { BiSolidEdit } from "react-icons/bi";
 
-const Estimatelist = ({ auth, resource }) => {
+const Estimatelist = ({ auth, record }) => {
     //Loading Edit View
     function editRecord(e) {
         router.get(route("leads.edit", e.currentTarget.id));
@@ -37,7 +37,7 @@ const Estimatelist = ({ auth, resource }) => {
                         <h4 className="mt-5">Add New Estimate</h4>
                         <Link
                             className="pt-2 pb-2"
-                            href={window.route("settings.create")}
+                            href={window.route("estimates.create")}
                             type="button"
                         >
                             <button className="w-[100%] bg-purple-600 h-[150%] rounded-md text-white font-bold">
@@ -70,9 +70,9 @@ const Estimatelist = ({ auth, resource }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {[""].map((item, index) => (
+                                    {record.map((item, index) => (
                                         <tr
-                                            // key={item.id}
+                                            key={item.id}
                                             className={
                                                 index % 2 === 0
                                                     ? "bg-gray-100"
@@ -80,10 +80,10 @@ const Estimatelist = ({ auth, resource }) => {
                                             }
                                         >
                                             <td className="px-4 py-2">
-                                                {/* {item.id} */}
+                                                {item.eid}
                                             </td>
                                             <td className="px-4 py-2">
-                                                {/* {item.type} */}
+                                                {item.eptitle}
                                             </td>
                                             <td className="px-4 py-2">
                                                 {/* {item.name} */}

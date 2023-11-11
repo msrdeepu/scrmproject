@@ -1,13 +1,11 @@
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
-import Leadform from "./Leadform";
-
+import EstimateForm from "./EstimateForm";
 const CreateEstimate = ({ auth, saveButton, record }) => {
     const { data, setData, post, processing, errors, patch } = useForm({
         ebclient: "",
         ebfirm: "",
-        lmanager: "",
         eid: "",
         erid: "",
         esdate: "",
@@ -16,22 +14,11 @@ const CreateEstimate = ({ auth, saveButton, record }) => {
         eptitle: "",
         epphase: "",
         epdetails: "",
-        // ebclient: "",
-        // ebfirm: "",
-        // lmanager: "",
-        // eid: "",
-        // erid: "",
-        // esdate: "",
-        // esdvalidity: "",
-        // eptype: "",
-        // eptitle: "",
-        // epphase: "",
-        // epdetails: "",
     });
     const submitHandler = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         console.log(data);
-        //post("/scrm-leads/store");
+        post("/scrm-estimates/store");
     };
 
     //update form submission
@@ -42,7 +29,7 @@ const CreateEstimate = ({ auth, saveButton, record }) => {
     };
     return (
         <AuthenticatedLayout user={auth.user}>
-            <Leadform
+            <EstimateForm
                 data={data}
                 setData={setData}
                 saveButton={"Save"}
