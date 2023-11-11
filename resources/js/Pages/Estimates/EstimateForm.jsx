@@ -125,7 +125,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[50%] m-3">
-                                <label htmlFor="erid">Title</label>
+                                <label htmlFor="erid">Reference ID</label>
                                 <Forminput
                                     onChange={(e) =>
                                         setData("erid", e.target.value)
@@ -258,25 +258,6 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                 />
                             </div>
                         </div>
-
-                        {/* <div className="flex flex-row justify-center items-center">
-                            <button
-                                type="submit"
-                                className="m-3 bg-green-600 w-[150px] h-[50px] text-white font-bold rounded-sm"
-                            >
-                                {saveButton}
-                            </button>
-
-                            <Link
-                                className="pt-2 pb-2"
-                                href={window.route("estimates.index")}
-                                type="button"
-                            >
-                                <button className="m-3 bg-red-500 w-[150px] h-[50px] text-white font-bold rounded-sm">
-                                    Cancel
-                                </button>
-                            </Link>
-                        </div> */}
                     </form>
                     <div>
                         <h1 className="text-center text-3xl mt-4 mb-3 bg-[#034EA2] p-4 text-white rounded-md">
@@ -317,7 +298,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                             </td>
                                             <td>
                                                 <Forminput
-                                                    type="text"
+                                                    type="number"
                                                     name="quantity"
                                                     value={row.quantity}
                                                     onChange={(e) =>
