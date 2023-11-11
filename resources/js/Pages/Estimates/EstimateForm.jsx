@@ -12,6 +12,9 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
         { product: "", quantity: "", price: "" },
     ]);
 
+    //amount state
+    const [estimateAmount, setEstimateAmount] = useState();
+
     const handleInputChange = (index, event) => {
         const { name, value } = event.target;
         const newFormData = [...formData];
@@ -60,7 +63,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                 </div>
                 <div className="w-[70%] flex flex-col p-4 bg-white m-2 ml-6 rounded-md shadow-md sm:h-[auto]">
                     <h3 className="text-center font-bold text-2xl text-orange-600 font-serif">
-                        Lead Management
+                        Estimate Management
                     </h3>
                     <form onSubmit={submitHandler}>
                         <div className="flex sm:flex-col md:flex-row justify-center items-center">
@@ -327,7 +330,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                             </td>
                                             <td>
                                                 <Forminput
-                                                    type="text"
+                                                    type="number"
                                                     name="price"
                                                     value={row.price}
                                                     onChange={(e) =>

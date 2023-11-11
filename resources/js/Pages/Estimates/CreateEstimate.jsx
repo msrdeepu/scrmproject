@@ -17,14 +17,13 @@ const CreateEstimate = ({ auth, saveButton, record }) => {
     });
     const submitHandler = (e) => {
         //e.preventDefault();
-        console.log(data);
+        //console.log(data);
         post("/scrm-estimates/store");
     };
 
     //update form submission
     const updateHandler = (e) => {
         e.preventDefault();
-        // patch(route("contacts.update"));
         //patch(`/scrm-leads/${record.id}`, data);
     };
     return (
