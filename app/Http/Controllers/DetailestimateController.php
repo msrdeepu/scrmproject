@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Detailestimate;
 use Illuminate\Http\Request;
-
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 class DetailestimateController extends Controller
 {
     /**
@@ -12,7 +14,10 @@ class DetailestimateController extends Controller
      */
     public function index()
     {
-        //
+        //$record = Detailestimate::get(['*', 'id AS key']);
+        return Inertia::render('Estimates/Estimatelist', [
+            'record' => $record,
+        ]);
     }
 
     /**
@@ -20,7 +25,9 @@ class DetailestimateController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Estimates/CreateEstimate', [
+            'record'=> new Detailestimate(),
+        ]);
     }
 
     /**
@@ -28,7 +35,12 @@ class DetailestimateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         //dd($request);
+         $requestData = $request->all();
+         $data = Detailestimate::create($requestData);
+         $data->save();
+ 
+         return to_route('estimates.index');
     }
 
     /**

@@ -20,6 +20,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
         const newFormData = [...formData];
         newFormData[index][name] = value;
         setFormData(newFormData);
+        console.log(newFormData);
     };
 
     const handleAddRow = () => {
@@ -37,6 +38,10 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
         submitHandler();
 
         // You can send the formData to your server or perform other actions here
+    };
+
+    const totalHandler = (e) => {
+        console.log(e.target.value);
     };
 
     return (
@@ -433,6 +438,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                     <label htmlFor="tname">Total Items</label>
                                     <Forminput
                                         readOnly
+                                        // value={newFormData.price}
                                         id="tname"
                                         // value={data.tname}
                                         // onChange={(e) =>
