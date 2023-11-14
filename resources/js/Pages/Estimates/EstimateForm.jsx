@@ -35,6 +35,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
     const handleSubmit = () => {
         console.log(formData);
         submitHandler();
+
         // You can send the formData to your server or perform other actions here
     };
 
@@ -77,7 +78,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                     onChange={(e) =>
                                         setData("ebclient", e.target.value)
                                     }
-                                    //value={data.ttype}
+                                    value={data.ebclient}
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
                                     placeholder="Select Client"
                                 >
@@ -99,7 +100,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                     onChange={(e) =>
                                         setData("ebfirm", e.target.value)
                                     }
-                                    //value={data.ttype}
+                                    value={data.ebfirm}
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
                                     placeholder="Select Firm"
                                 >
@@ -121,7 +122,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                     }
                                     id="eid"
                                     placeholder="Estimate ID"
-                                    value={data.title}
+                                    value={data.eid}
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[50%] m-3">
@@ -132,7 +133,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                     }
                                     id="erid"
                                     placeholder="Reference ID"
-                                    //value={data.title}
+                                    value={data.erid}
                                 />
                             </div>
                         </div>
@@ -146,7 +147,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                     id="esdate"
                                     type="date"
                                     placeholder="Reference ID"
-                                    //value={data.title}
+                                    value={data.esdate}
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[50%] m-3">
@@ -160,7 +161,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                     id="esdvalidity"
                                     type="date"
                                     placeholder="Reference ID"
-                                    //value={data.title}
+                                    value={data.esdvalidity}
                                 />
                             </div>
                         </div>
@@ -220,18 +221,18 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                     }
                                     id="eptitle"
                                     placeholder="Proposal Title"
-                                    //value={data.title}
+                                    value={data.eptitle}
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[50%] m-3">
-                                <label htmlFor="epphase">Proposal Title</label>
+                                <label htmlFor="epphase">Proposal Phase</label>
                                 <Forminput
                                     onChange={(e) =>
                                         setData("epphase", e.target.value)
                                     }
                                     id="epphase"
                                     placeholder="Phase I, Phase II, Phase III"
-                                    //value={data.title}
+                                    value={data.epphase}
                                 />
                             </div>
                         </div>
@@ -242,13 +243,11 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                 </label>
                                 <JoditEditor
                                     id="others"
-                                    //value={data.otherdetails}
-                                    // value={
-                                    //     data.otherdetails == undefined
-                                    //         ? detailsContent
-                                    //         : data.otherdetails
-                                    // }
-                                    value={detailsContent}
+                                    value={
+                                        data.epdetails == undefined
+                                            ? detailsContent
+                                            : data.epdetails
+                                    }
                                     onBlur={(newContent) =>
                                         setdetailsContent(newContent)
                                     }
@@ -280,6 +279,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                         {formData.length > 1 && <th>Action</th>}
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     {formData.map((row, index) => (
                                         <tr key={index}>
@@ -354,9 +354,6 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                         </tr>
                                     ))}
                                 </tbody>
-                            </table>
-                            <div className="flex sm:flex-col md:flex-row justify-center items-center">
-                                {" "}
                                 <button
                                     className="m-3 bg-purple-600 w-[150px] h-[50px] text-white font-bold rounded-sm"
                                     type="button"
@@ -364,12 +361,186 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                 >
                                     Add New Row
                                 </button>
+                            </table>
+                            <div className="flex flex-row justify-evenly flex-wrap">
+                                <div className="m-3 sm:w-[100%] md:w-[45%]">
+                                    <label className="" htmlFor="leadManager">
+                                        Discount Format
+                                    </label>
+                                    <br />
+                                    <select
+                                        id="tstatus"
+                                        value={data.tstatus}
+                                        onChange={(e) =>
+                                            setData("tstatus", e.target.value)
+                                        }
+                                        className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
+                                        placeholder="Select Task Status"
+                                    >
+                                        <option>Select Lead Manager</option>
+                                        <option>Business</option>
+                                        <option>Client</option>
+                                        <option>Business Lead</option>
+                                        <option>Student</option>
+                                        <option>Intern</option>
+                                    </select>
+                                </div>
+                                <div className="m-3 sm:w-[100%] md:w-[45%]">
+                                    <label className="" htmlFor="leadManager">
+                                        Tax Mode
+                                    </label>
+                                    <br />
+                                    <select
+                                        id="tstatus"
+                                        value={data.tstatus}
+                                        onChange={(e) =>
+                                            setData("tstatus", e.target.value)
+                                        }
+                                        className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
+                                        placeholder="Select Task Status"
+                                    >
+                                        <option>Select Lead Manager</option>
+                                        <option>Business</option>
+                                        <option>Client</option>
+                                        <option>Business Lead</option>
+                                        <option>Student</option>
+                                        <option>Intern</option>
+                                    </select>
+                                </div>
+                                <div className="m-3 sm:w-[100%] md:w-[45%]">
+                                    <label className="" htmlFor="leadManager">
+                                        Select Payment Status
+                                    </label>
+                                    <br />
+                                    <select
+                                        id="tstatus"
+                                        value={data.tstatus}
+                                        onChange={(e) =>
+                                            setData("tstatus", e.target.value)
+                                        }
+                                        className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
+                                        placeholder="Select Task Status"
+                                    >
+                                        <option>Select Payment Status</option>
+                                        <option>Business</option>
+                                        <option>Client</option>
+                                        <option>Business Lead</option>
+                                        <option>Student</option>
+                                        <option>Intern</option>
+                                    </select>
+                                </div>
+                                <div className="sm:w-[100%] md:w-[45%] m-3">
+                                    <label htmlFor="tname">Total Items</label>
+                                    <Forminput
+                                        readOnly
+                                        id="tname"
+                                        // value={data.tname}
+                                        // onChange={(e) =>
+                                        //     setData("tname", e.target.value)
+                                        // }
+                                        placeholder="Total Items"
+                                    />
+                                </div>
+                                <div className="sm:w-[100%] md:w-[45%] m-3">
+                                    <label htmlFor="tname">Subtotal</label>
+                                    <Forminput
+                                        readOnly
+                                        id="tname"
+                                        // value={data.tname}
+                                        // onChange={(e) =>
+                                        //     setData("tname", e.target.value)
+                                        // }
+                                        placeholder="Total Items"
+                                    />
+                                </div>
+                                <div className="sm:w-[100%] md:w-[45%] m-3">
+                                    <label htmlFor="tname">Discount</label>
+                                    <Forminput
+                                        readOnly
+                                        id="tname"
+                                        // value={data.tname}
+                                        // onChange={(e) =>
+                                        //     setData("tname", e.target.value)
+                                        // }
+                                        placeholder="Total Items"
+                                    />
+                                </div>
+                                <div className="sm:w-[100%] md:w-[45%] m-3">
+                                    <label htmlFor="tname">TOTAL</label>
+                                    <Forminput
+                                        readOnly
+                                        id="tname"
+                                        // value={data.tname}
+                                        // onChange={(e) =>
+                                        //     setData("tname", e.target.value)
+                                        // }
+                                        placeholder="Total Items"
+                                    />
+                                </div>
+                                <div className="sm:w-[100%] md:w-[45%] m-3">
+                                    <label htmlFor="tname">
+                                        Shipping / Packing Handling Charges
+                                    </label>
+                                    <Forminput
+                                        id="tname"
+                                        // value={data.tname}
+                                        // onChange={(e) =>
+                                        //     setData("tname", e.target.value)
+                                        // }
+                                        placeholder="Total Items"
+                                    />
+                                </div>
+                                <div className="sm:w-[100%] md:w-[45%] m-3">
+                                    <label htmlFor="tname">GRAND TOTAL</label>
+                                    <Forminput
+                                        readOnly
+                                        id="tname"
+                                        // value={data.tname}
+                                        // onChange={(e) =>
+                                        //     setData("tname", e.target.value)
+                                        // }
+                                        placeholder="Total Items"
+                                    />
+                                </div>
+                                <div className="sm:w-[100%] md:w-[45%] m-3">
+                                    <label htmlFor="tname">Amount Paid</label>
+                                    <Forminput
+                                        readOnly
+                                        id="tname"
+                                        // value={data.tname}
+                                        // onChange={(e) =>
+                                        //     setData("tname", e.target.value)
+                                        // }
+                                        placeholder="Total Items"
+                                    />
+                                </div>
+                                <div className="sm:w-[100%] md:w-[95%] m-3">
+                                    <label htmlFor="tname">Amount Due</label>
+                                    <Forminput
+                                        readOnly
+                                        id="tname"
+                                        // value={data.tname}
+                                        // onChange={(e) =>
+                                        //     setData("tname", e.target.value)
+                                        // }
+                                        placeholder="Total Items"
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex sm:flex-col md:flex-row justify-center items-center">
+                                {/* <button
+                                    className="m-3 bg-purple-600 w-[150px] h-[50px] text-white font-bold rounded-sm"
+                                    type="button"
+                                    onClick={handleAddRow}
+                                >
+                                    Add New Row
+                                </button> */}
                                 <button
                                     className="m-3 bg-green-600 w-[150px] h-[50px] text-white font-bold rounded-sm"
                                     type="button"
                                     onClick={handleSubmit}
                                 >
-                                    Submit
+                                    {saveButton}
                                 </button>
                                 <Link
                                     className="pt-2 pb-2"

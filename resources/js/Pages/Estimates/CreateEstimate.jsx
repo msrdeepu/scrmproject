@@ -4,18 +4,18 @@ import { Head, useForm } from "@inertiajs/react";
 import EstimateForm from "./EstimateForm";
 const CreateEstimate = ({ auth, saveButton, record }) => {
     const { data, setData, post, processing, errors, patch } = useForm({
-        ebclient: "",
-        ebfirm: "",
-        eid: "",
-        erid: "",
-        esdate: "",
-        esdvalidity: "",
-        eptype: "",
-        eptitle: "",
-        epphase: "",
-        epdetails: "",
+        ebclient: record.ebclient,
+        ebfirm: record.ebfirm,
+        eid: record.eid,
+        erid: record.erid,
+        esdate: record.esdate,
+        esdvalidity: record.esdvalidity,
+        eptype: record.eptype,
+        eptitle: record.eptitle,
+        epphase: record.epphase,
+        epdetails: record.epdetails,
     });
-    const submitHandler = (e) => {
+    const createHandler = (e) => {
         //e.preventDefault();
         //console.log(data);
         post("/scrm-estimates/store");
@@ -23,20 +23,17 @@ const CreateEstimate = ({ auth, saveButton, record }) => {
 
     //update form submission
     const updateHandler = (e) => {
-        e.preventDefault();
-        //patch(`/scrm-leads/${record.id}`, data);
+        patch(`/scrm-estimates/${record.id}`, data);
     };
     return (
         <AuthenticatedLayout user={auth.user}>
             <EstimateForm
                 data={data}
                 setData={setData}
-                saveButton={"Save"}
-                //saveButton={record.title == undefined ? "Add" : "Save"}
-                submitHandler={submitHandler}
-                // submitHandler={
-                //     record.title == undefined ? submitHandler : updateHandler
-                // }
+                saveButton={record.ebclient == undefined ? "Add" : "Save"}
+                submitHandler={
+                    record.ebclient == undefined ? createHandler : updateHandler
+                }
             />
         </AuthenticatedLayout>
     );

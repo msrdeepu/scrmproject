@@ -55,24 +55,35 @@ class EstimateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Estimate $estimate)
+    public function edit(Estimate $estimate, $id)
     {
-        //
+        $user = Auth::user();
+        $estimates = Estimate::get(['id', 'ebclient', 'ebfirm', 'eid', 'erid', 'esdate', 'esdvalidity', 'eptype', 'eptitle', 'epphase', 'epdetails']);
+        $estimate= Estimate::find($id);
+        return Inertia::render('Estimates/CreateEstimate', [
+            'user' => $user,
+            'estimateslist' => $estimates,
+            'record' => $estimate,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Estimate $estimate)
+    public function update(Request $request, $id)
     {
-        //
+        $estimate = Estimate::find($id);
+        $requestData = $request->all();
+        $updated=$estimate->update($requestData);
+        return to_route('estimates.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Estimate $estimate)
+    public function destroy($id)
     {
-        //
+        Estimate::find($id)->delete();
+        return to_route('estimates.index');
     }
 }

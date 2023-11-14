@@ -9,12 +9,12 @@ import { BiSolidEdit } from "react-icons/bi";
 const Estimatelist = ({ auth, record }) => {
     //Loading Edit View
     function editRecord(e) {
-        router.get(route("leads.edit", e.currentTarget.id));
+        router.get(route("estimates.edit", e.currentTarget.id));
     }
     //destroy record
     function destroyRecord(e) {
         if (confirm("Are you sure you want to delete this record ?")) {
-            router.delete(route("leads.destroy", e.currentTarget.id));
+            router.delete(route("estimates.destroy", e.currentTarget.id));
         }
     }
     return (
@@ -97,31 +97,29 @@ const Estimatelist = ({ auth, record }) => {
 
                                             <td className="px-4 py-2">
                                                 <button
+                                                    id={item.id}
                                                     className="p-2 m-2 bg-green-400 text-white font-bold rounded-md"
-                                                    // id={item.id}
-                                                    //onClick={editRecord}
                                                 >
                                                     <AiFillCopy />
                                                 </button>
                                                 <button
                                                     className="p-2 m-2 bg-blue-400 text-white font-bold rounded-md"
-                                                    // id={item.id}
-                                                    //onClick={editRecord}
+                                                    id={item.id}
                                                 >
                                                     <AiFillPrinter />
                                                 </button>
                                                 <button
                                                     className="p-2 m-2 bg-orange-400 text-white font-bold rounded-md"
-                                                    //id={item.id}
-                                                    //onClick={destroyRecord}
+                                                    id={item.id}
+                                                    onClick={editRecord}
                                                 >
                                                     <BiSolidEdit />
                                                 </button>
 
                                                 <button
                                                     className="p-2 m-2 bg-red-400 text-white font-bold rounded-md"
-                                                    //id={item.id}
-                                                    //onClick={destroyRecord}
+                                                    id={item.id}
+                                                    onClick={destroyRecord}
                                                 >
                                                     <AiFillDelete />
                                                 </button>
