@@ -9,6 +9,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\EmployeController;
 use App\Http\Controllers\EstimateController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -76,6 +77,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/scrm-activity/{id}/edit',[ActivityController::class, 'edit'])->name('activity.edit');
     Route::patch('/scrm-activity/{id}', [ActivityController::class, 'update'])->name('activity.update');
     Route::delete('/scrm-activity/{id}', [ActivityController::class, 'destroy']) -> name('activity.destroy');
+
+    Route::get('/scrm-employee', [EmployeController::class, 'index'])->name('employee.index');
+    Route::get('/scrm-employee/create', [EmployeController::class, 'create'])->name('employee.create');
+    Route::post('/scrm-employee/store', [EmployeController::class, 'store'])->name('employee.store');
+    Route::get('/scrm-employee/{id}/edit',[EmployeController::class, 'edit'])->name('employee.edit');
+    Route::patch('/scrm-employee/{id}', [EmployeController::class, 'update'])->name('employee.update');
+    Route::delete('/scrm-employee/{id}', [EmployeController::class, 'destroy']) -> name('employee.destroy');
 
     Route::get('/scrm-projects', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/scrm-projects/create', [ProjectController::class, 'create'])->name('projects.create');

@@ -7,6 +7,9 @@ import JoditEditor from "jodit-react";
 const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
     const [detailsContent, setdetailsContent] = useState("");
 
+    const [totalItems, setToatalItems] = useState();
+    const [itemPrice, setItemPrice] = useState();
+
     //detailed form data submission
     const [formData, setFormData] = useState([
         { product: "", quantity: "", price: "" },
@@ -20,7 +23,6 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
         const newFormData = [...formData];
         newFormData[index][name] = value;
         setFormData(newFormData);
-        console.log(newFormData);
     };
 
     const handleAddRow = () => {
@@ -33,15 +35,14 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
         setFormData(newFormData);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (index) => {
         console.log(formData);
+        // console.log(formData.price);
+        console.log(...formData);
+        // setToatalItems(formData.length);
         submitHandler();
 
         // You can send the formData to your server or perform other actions here
-    };
-
-    const totalHandler = (e) => {
-        console.log(e.target.value);
     };
 
     return (
@@ -268,6 +269,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                             Detailed Estimate
                         </h1>
                         {/* detailed form starts */}
+                        {/* {...formData.map((item) => console.log(item.price))} */}
 
                         <form className="flex flex-col justify-center items-center mt-3">
                             <table>
@@ -359,6 +361,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                         </tr>
                                     ))}
                                 </tbody>
+
                                 <button
                                     className="m-3 bg-purple-600 w-[150px] h-[50px] text-white font-bold rounded-sm"
                                     type="button"
@@ -383,11 +386,9 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                         placeholder="Select Task Status"
                                     >
                                         <option>Select Lead Manager</option>
-                                        <option>Business</option>
-                                        <option>Client</option>
-                                        <option>Business Lead</option>
-                                        <option>Student</option>
-                                        <option>Intern</option>
+                                        <option>5%</option>
+                                        <option>10%</option>
+                                        <option>15%</option>
                                     </select>
                                 </div>
                                 <div className="m-3 sm:w-[100%] md:w-[45%]">
@@ -404,12 +405,12 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                         className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
                                         placeholder="Select Task Status"
                                     >
-                                        <option>Select Lead Manager</option>
-                                        <option>Business</option>
-                                        <option>Client</option>
+                                        <option>Select Tax Mode</option>
+                                        <option>IGST 18%</option>
+                                        {/* <option>Client</option>
                                         <option>Business Lead</option>
                                         <option>Student</option>
-                                        <option>Intern</option>
+                                        <option>Intern</option> */}
                                     </select>
                                 </div>
                                 <div className="m-3 sm:w-[100%] md:w-[45%]">
@@ -435,15 +436,20 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                     </select>
                                 </div>
                                 <div className="sm:w-[100%] md:w-[45%] m-3">
-                                    <label htmlFor="tname">Total Items</label>
+                                    <label htmlFor="totalItems">
+                                        Total Items
+                                    </label>
                                     <Forminput
                                         readOnly
-                                        // value={newFormData.price}
-                                        id="tname"
-                                        // value={data.tname}
-                                        // onChange={(e) =>
-                                        //     setData("tname", e.target.value)
-                                        // }
+                                        type="number"
+                                        id="totalItems"
+                                        onChange={(e) =>
+                                            setData(
+                                                "totalitems",
+                                                formData.length
+                                            )
+                                        }
+                                        value={formData.length}
                                         placeholder="Total Items"
                                     />
                                 </div>
@@ -462,7 +468,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler }) => {
                                 <div className="sm:w-[100%] md:w-[45%] m-3">
                                     <label htmlFor="tname">Discount</label>
                                     <Forminput
-                                        readOnly
+                                        type="number"
                                         id="tname"
                                         // value={data.tname}
                                         // onChange={(e) =>
