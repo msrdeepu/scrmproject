@@ -14,6 +14,16 @@ const CreateEstimate = ({ auth, saveButton, record, esmtax }) => {
         eptitle: record.eptitle,
         epphase: record.epphase,
         epdetails: record.epdetails,
+        disformate: record.disformate,
+        taxmode: record.taxmode,
+        paystatus: record.paystatus,
+        totalitems: record.totalitems,
+        subtotal: record.subtotal,
+        discount: record.discount,
+        total: record.total,
+        grandtotal: record.grandtotal,
+        paidamount: record.paidamount,
+        dueamount: record.dueamount,
     });
 
     const createHandler = (e) => {

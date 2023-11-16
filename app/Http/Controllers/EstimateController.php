@@ -39,12 +39,12 @@ class EstimateController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
-        $requestData = $request->all();
-        $data = Estimate::create($requestData);
-        $data->save();
+        dd($request);
+        // $requestData = $request->all();
+        // $data = Estimate::create($requestData);
+        // $data->save();
 
-        return to_route('estimates.index');
+        // return to_route('estimates.index');
     }
 
     /**
@@ -55,13 +55,14 @@ class EstimateController extends Controller
         //
     }
 
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Estimate $estimate, $id)
     {
         $user = Auth::user();
-        $estimates = Estimate::get(['id', 'ebclient', 'ebfirm', 'eid', 'erid', 'esdate', 'esdvalidity', 'eptype', 'eptitle', 'epphase', 'epdetails']);
+        $estimates = Estimate::get(['id', 'ebclient', 'ebfirm', 'eid', 'erid', 'esdate', 'esdvalidity', 'eptype', 'eptitle', 'epphase', 'epdetails', 'disformate', 'taxmode', 'paystatus', 'totalitems', 'subtotal' ,'discount', 'total', 'grandtotal', 'paidamount', 'dueamount']);
         $estimate= Estimate::find($id);
         return Inertia::render('Estimates/CreateEstimate', [
             'user' => $user,

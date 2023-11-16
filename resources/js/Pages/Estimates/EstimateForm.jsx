@@ -7,16 +7,18 @@ import JoditEditor from "jodit-react";
 const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
     const [detailsContent, setdetailsContent] = useState("");
 
-    const [discount, setDiscount] = useState(0);
+    const [discount, setDiscount] = useState();
 
-    const [shipCharges, setShipCharges] = useState(0);
+    const [shipCharges, setShipCharges] = useState();
 
-    const [paidAmount, setPaidAmount] = useState(0);
+    const [paidAmount, setPaidAmount] = useState();
 
     const [formData, setFormData] = useState([
         { product: "", quantity: "", price: "", amount: "" },
     ]);
     const [totalAmount, setTotalAmount] = useState(0);
+
+    const [taxMode, setTaxMode] = useState();
 
     //detailed estimate form useForm
 
@@ -67,6 +69,11 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
         setTotalAmount(sum.toFixed(2));
     };
 
+    const taxModeHandler = (e) => {
+        setTaxMode(e.target.value);
+        setData("taxmode", e.target.value);
+    };
+
     // const handleSubmit = () => {
     //   console.log(formData);
     //   // You can send the formData to your server or perform other actions here
@@ -74,6 +81,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
 
     const paidAmountHandler = (e) => {
         setPaidAmount(e.target.value);
+        setData("paidamount", e.target.value);
     };
 
     const handleSubmit = () => {
@@ -431,18 +439,15 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                                 </select>
                             </div>
                             <div className="m-3 sm:w-[100%] md:w-[45%]">
-                                <label className="" htmlFor="leadManager">
+                                <label className="" htmlFor="taxmode">
                                     Tax Mode
                                 </label>
                                 <br />
                                 <select
-                                    id="tstatus"
-                                    value={data.tstatus}
-                                    onChange={(e) =>
-                                        setData("tstatus", e.target.value)
-                                    }
+                                    id="taxmode"
+                                    //value={data.tstatus}
+                                    onChange={taxModeHandler}
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
-                                    placeholder="Select Task Status"
                                 >
                                     <option>Select Tax Mode</option>
                                     {esmtax.map(function (data) {
@@ -453,34 +458,32 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                                         );
                                     })}
                                 </select>
-                                {console.log(esmtax)}
                             </div>
                             <div className="m-3 sm:w-[100%] md:w-[45%]">
-                                <label className="" htmlFor="leadManager">
+                                <label className="" htmlFor="paystatus">
                                     Select Payment Status
                                 </label>
                                 <br />
                                 <select
-                                    id="tstatus"
+                                    id="paystatus"
                                     value={data.tstatus}
                                     onChange={(e) =>
-                                        setData("tstatus", e.target.value)
+                                        setData("paystatus", e.target.value)
                                     }
                                     className="w-[100%] rounded border-[0.5px] border-[#D3D3D3]"
-                                    placeholder="Select Task Status"
                                 >
                                     <option>Select Payment Status</option>
-                                    <option>Business</option>
-                                    <option>Client</option>
+                                    <option>Paid</option>
+                                    {/* <option>Client</option>
                                     <option>Business Lead</option>
                                     <option>Student</option>
-                                    <option>Intern</option>
+                                    <option>Intern</option> */}
                                 </select>
                             </div>
                             <div className="sm:w-[100%] md:w-[45%] m-3">
                                 <label htmlFor="totalItems">Total Items</label>
                                 <Forminput
-                                    readOnly
+                                    // readOnly
                                     type="number"
                                     id="totalItems"
                                     onChange={(e) =>
@@ -491,32 +494,38 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[45%] m-3">
-                                <label htmlFor="tname">Subtotal</label>
+                                <label htmlFor="subtotal">Subtotal</label>
                                 <Forminput
-                                    readOnly
-                                    id="tname"
+                                    onLoad={(e) =>
+                                        setData("subtotal", e.target.value)
+                                    }
+                                    //readOnly
+                                    id="subtotal"
                                     value={subTotal}
                                     placeholder="Subtotal"
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[45%] m-3">
-                                <label htmlFor="tname">Discount</label>
+                                <label htmlFor="discount">Discount</label>
                                 <Forminput
                                     type="number"
-                                    id="tname"
+                                    id="discount"
+                                    // onChange={(e) =>
+                                    //     setData("discount", e.target.value)
+                                    // }
                                     onChange={handleDiscount}
                                     placeholder="Discount"
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[45%] m-3">
-                                <label htmlFor="tname">TOTAL</label>
+                                <label htmlFor="total">TOTAL</label>
                                 <Forminput
-                                    readOnly
-                                    id="tname"
+                                    //readOnly
+                                    id="total"
                                     value={total}
-                                    // onChange={(e) =>
-                                    //     setData("tname", e.target.value)
-                                    // }
+                                    onChange={(e) =>
+                                        setData("total", e.target.value)
+                                    }
                                     placeholder="Total"
                                 />
                             </div>
@@ -533,48 +542,41 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[45%] m-3">
-                                <label htmlFor="tname">GRAND TOTAL</label>
+                                <label htmlFor="grandtotal">GRAND TOTAL</label>
                                 <Forminput
-                                    readOnly
-                                    id="tname"
+                                    //readOnly
+                                    id="grandtotal"
                                     value={grandTotal}
-                                    // onChange={(e) =>
-                                    //     setData("tname", e.target.value)
-                                    // }
+                                    onChange={(e) =>
+                                        setData("grandtotal", e.target.value)
+                                    }
                                     placeholder="Total Items"
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[45%] m-3">
-                                <label htmlFor="tname">Amount Paid</label>
+                                <label htmlFor="paidamount">Amount Paid</label>
                                 <Forminput
                                     type="number"
-                                    id="tname"
+                                    id="paidamount"
                                     // value={data.tname}
                                     onChange={paidAmountHandler}
                                     placeholder="Amount Paid"
                                 />
                             </div>
                             <div className="sm:w-[100%] md:w-[95%] m-3">
-                                <label htmlFor="tname">Amount Due</label>
+                                <label htmlFor="dueamount">Amount Due</label>
                                 <Forminput
                                     readOnly
-                                    id="tname"
+                                    id="dueamount"
                                     value={dueAmount}
-                                    // onChange={(e) =>
-                                    //     setData("tname", e.target.value)
-                                    // }
+                                    onChange={(e) =>
+                                        setData("dueamount", dueAmount)
+                                    }
                                     placeholder="Due Amount"
                                 />
                             </div>
                         </div>
                         <div className="flex sm:flex-col md:flex-row justify-center items-center">
-                            {/* <button
-                                    className="m-3 bg-purple-600 w-[150px] h-[50px] text-white font-bold rounded-sm"
-                                    type="button"
-                                    onClick={handleAddRow}
-                                >
-                                    Add New Row
-                                </button> */}
                             <button
                                 className="m-3 bg-green-600 w-[150px] h-[50px] text-white font-bold rounded-sm"
                                 type="button"

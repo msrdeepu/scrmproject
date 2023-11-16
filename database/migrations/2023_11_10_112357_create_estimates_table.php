@@ -4,16 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-// ebclient: "",
-//         ebfirm: "",
-//         eid: "",
-//         erid: "",
-//         esdate: "",
-//         esdvalidity: "",
-//         eptype: "",
-//         eptitle: "",
-//         epphase: "",
-//         epdetails: "",
 
 return new class extends Migration
 {
@@ -34,6 +24,16 @@ return new class extends Migration
             $table->string('eptitle')->nullable();
             $table->string('epphase')->nullable();
             $table->string('epdetails')->nullable();
+            $table->string('disformate')->nullable();
+            $table->string('taxmode')->nullable();
+            $table->string('paystatus')->nullable();
+            $table->bigInteger('totalitems')->nullable();
+            $table->bigInteger('subtotal')->nullable();
+            $table->bigInteger('discount')->nullable();
+            $table->bigInteger('total')->nullable();
+            $table->bigInteger('grandtotal')->nullable();
+            $table->bigInteger('paidamount')->nullable();
+            $table->bigInteger('dueamount')->nullable();
             $table->timestamps();
         });
     }

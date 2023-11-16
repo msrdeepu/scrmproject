@@ -86,7 +86,7 @@ const Estimatelist = ({ auth, record }) => {
                                                 {item.eptitle}
                                             </td>
                                             <td className="px-4 py-2">
-                                                {/* {item.name} */}
+                                                {item.grandtotal}
                                             </td>
                                             <td className="px-4 py-2">
                                                 {/* {item.value} */}
