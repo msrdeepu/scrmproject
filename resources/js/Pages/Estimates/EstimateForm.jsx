@@ -474,10 +474,6 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                                 >
                                     <option>Select Payment Status</option>
                                     <option>Paid</option>
-                                    {/* <option>Client</option>
-                                    <option>Business Lead</option>
-                                    <option>Student</option>
-                                    <option>Intern</option> */}
                                 </select>
                             </div>
                             <div className="sm:w-[100%] md:w-[45%] m-3">
