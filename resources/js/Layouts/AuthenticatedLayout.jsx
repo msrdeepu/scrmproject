@@ -125,6 +125,14 @@ export default function Authenticated({ user, header, children }) {
                                                 >
                                                     Manage Tasks
                                                 </Dropdown.Link>
+                                                <Dropdown.Link
+                                                    href={route(
+                                                        "employee.index"
+                                                    )}
+                                                    as="button"
+                                                >
+                                                    Manage Employes
+                                                </Dropdown.Link>
                                             </Dropdown.Content>
                                         </Dropdown>
                                     </div>

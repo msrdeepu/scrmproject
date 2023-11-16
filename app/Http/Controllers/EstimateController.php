@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Estimate;
 use Illuminate\Http\Request;
+use App\Models\Setting;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -25,9 +26,11 @@ class EstimateController extends Controller
      */
     public function create()
     {
+        $esmtax = Setting::where('type', '=', 'LIST')->where('name', '=', 'esmtax')->get(['name AS label', 'value', 'id AS key']);
         
         return Inertia::render('Estimates/CreateEstimate', [
             'record'=> new Estimate(),
+            'esmtax' => $esmtax,
         ]);
     }
 

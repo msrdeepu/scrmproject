@@ -2,7 +2,7 @@ import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import EstimateForm from "./EstimateForm";
-const CreateEstimate = ({ auth, saveButton, record }) => {
+const CreateEstimate = ({ auth, saveButton, record, esmtax }) => {
     const { data, setData, post, processing, errors, patch } = useForm({
         ebclient: record.ebclient,
         ebfirm: record.ebfirm,
@@ -15,6 +15,7 @@ const CreateEstimate = ({ auth, saveButton, record }) => {
         epphase: record.epphase,
         epdetails: record.epdetails,
     });
+
     const createHandler = (e) => {
         //e.preventDefault();
         //console.log(data);
@@ -28,6 +29,7 @@ const CreateEstimate = ({ auth, saveButton, record }) => {
     return (
         <AuthenticatedLayout user={auth.user}>
             <EstimateForm
+                esmtax={esmtax}
                 data={data}
                 setData={setData}
                 saveButton={record.ebclient == undefined ? "Add" : "Save"}
