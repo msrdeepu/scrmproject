@@ -7,11 +7,13 @@ import JoditEditor from "jodit-react";
 const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
     const [detailsContent, setdetailsContent] = useState("");
 
-    const [discount, setDiscount] = useState();
+    const [discount, setDiscount] = useState(0);
 
-    const [shipCharges, setShipCharges] = useState();
+    const [shipCharges, setShipCharges] = useState(0);
 
-    const [paidAmount, setPaidAmount] = useState();
+    const [paidAmount, setPaidAmount] = useState("");
+
+    const [totalItems, setTotalItems] = useState("");
 
     const [formData, setFormData] = useState([
         { product: "", quantity: "", price: "", amount: "" },
@@ -82,10 +84,65 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
     const paidAmountHandler = (e) => {
         setPaidAmount(e.target.value);
         setData("paidamount", e.target.value);
+        //total items
+        //let totalItems = document.getElementById("totalItems");
+        //setData("totalitems", totalItems.value);
+        //sub total
+        //let subTotalItem = document.getElementById("subtotal");
+        //console.log(subTotalItem.value);
+        //setData("subtotal", subTotalItem.value);
+        //total
+        //let totalItemState = document.getElementById("totalAmount");
+        //console.log(totalItemState.value);
+        //setData("total", totalItemState.value);
+        //grand total
+        //let grandTotalStateItem = document.getElementById("grandtotal");
+        //console.log(grandTotalStateItem.value);
+        //setData("grandtotal", grandTotalStateItem.value);
+        //dueamount
+        //let dueAmountItem = document.getElementById("dueamount");
+        //console.log(dueAmountItem.value);
+        //setData("dueamount", dueAmountItem.value);
     };
+
+    // const totalItemsStateHandler = () => {
+    //     let totalItems = document.getElementById("totalItems");
+    //     //console.log(totalItems.value);
+    //     setData("totalitems", totalItems.value);
+    // };
+
+    // const subtotalStateHandler = () => {
+    //     let subTotalItem = document.getElementById("subtotal");
+    //     console.log(subTotalItem.value);
+    //     setData("subtotal", subTotalItem.value);
+    // };
+
+    // const totalStateHandler = () => {
+    //     let totalItemState = document.getElementById("totalAmount");
+    //     console.log(totalItemState.value);
+    //     setData("total", totalItemState.value);
+    // };
+
+    // const grandTotalStateHandler = () => {
+    //     let grandTotalStateItem = document.getElementById("grandtotal");
+    //     console.log(grandTotalStateItem.value);
+    //     setData("grandtotal", grandTotalStateItem.value);
+    // };
+
+    // const dueAmountStateHandler = () => {
+    //     let dueAmountItem = document.getElementById("dueamount");
+    //     console.log(dueAmountItem.value);
+    //     setData("dueamount", dueAmountItem.value);
+    // };
 
     const handleSubmit = () => {
         console.log(formData);
+        //readOnlyValuesStateUpdate();
+        // totalItemsStateHandler();
+        // subtotalStateHandler();
+        // totalStateHandler();
+        // dueAmountStateHandler();
+        // grandTotalStateHandler();
         submitHandler();
     };
 
@@ -482,9 +539,6 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                                     // readOnly
                                     type="number"
                                     id="totalItems"
-                                    onChange={(e) =>
-                                        setData("totalitems", formData.length)
-                                    }
                                     value={formData.length}
                                     placeholder="Total Items"
                                 />
@@ -492,10 +546,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                             <div className="sm:w-[100%] md:w-[45%] m-3">
                                 <label htmlFor="subtotal">Subtotal</label>
                                 <Forminput
-                                    onLoad={(e) =>
-                                        setData("subtotal", e.target.value)
-                                    }
-                                    //readOnly
+                                    readOnly
                                     id="subtotal"
                                     value={subTotal}
                                     placeholder="Subtotal"
@@ -516,12 +567,9 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                             <div className="sm:w-[100%] md:w-[45%] m-3">
                                 <label htmlFor="total">TOTAL</label>
                                 <Forminput
-                                    //readOnly
-                                    id="total"
+                                    readOnly
+                                    id="totalAmount"
                                     value={total}
-                                    onChange={(e) =>
-                                        setData("total", e.target.value)
-                                    }
                                     placeholder="Total"
                                 />
                             </div>
@@ -565,9 +613,6 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                                     readOnly
                                     id="dueamount"
                                     value={dueAmount}
-                                    onChange={(e) =>
-                                        setData("dueamount", dueAmount)
-                                    }
                                     placeholder="Due Amount"
                                 />
                             </div>

@@ -28,7 +28,7 @@ const CreateEstimate = ({ auth, saveButton, record, esmtax }) => {
 
     const createHandler = (e) => {
         //e.preventDefault();
-        //console.log(data);
+        console.log(data);
         post("/scrm-estimates/store");
     };
 
