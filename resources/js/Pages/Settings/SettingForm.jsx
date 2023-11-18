@@ -58,9 +58,6 @@ const Leadform = ({
                                 >
                                     <option>Select Type</option>
                                     {stype.map(function (data) {
-                                        {
-                                            console.log(stype);
-                                        }
                                         return (
                                             <>
                                                 <option key={data.value}>

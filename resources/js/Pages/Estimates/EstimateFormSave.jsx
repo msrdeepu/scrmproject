@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Head, Link, router, useForm } from "@inertiajs/react";
 //form components
 import Forminput from "@/Components/Customcomponents/FormItems/Forminut";
@@ -8,7 +8,6 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
     const [detailsContent, setdetailsContent] = useState("");
 
     const [discount, setDiscount] = useState(0);
-    const [dueAmount, setdueAmount] = useState(0);
 
     const [shipCharges, setShipCharges] = useState(0);
 
@@ -79,16 +78,6 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
         setData("taxmode", e.target.value);
     };
 
-    // const totalItemsStateHandler = () => {
-    //     let totalItems = document.getElementById("totalItems").value;
-    //     //console.log(totalItems.value);
-    //     setData("totalitems", totalItems);
-    //     console.log(totalItems);
-    // };
-    // useEffect(() => {
-    //     totalItemsStateHandler();
-    // }, [totalItems]);
-
     const paidAmountHandler = (e) => {
         setPaidAmount(e.target.value);
         setData("paidamount", e.target.value);
@@ -112,6 +101,12 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
         //console.log(dueAmountItem.value);
         //setData("dueamount", dueAmountItem.value);
     };
+
+    // const totalItemsStateHandler = () => {
+    //     let totalItems = document.getElementById("totalItems");
+    //     //console.log(totalItems.value);
+    //     setData("totalitems", totalItems.value);
+    // };
 
     // const subtotalStateHandler = () => {
     //     let subTotalItem = document.getElementById("subtotal");
@@ -137,20 +132,6 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
     //     setData("dueamount", dueAmountItem.value);
     // };
 
-    let subTotal = totalAmount;
-    let totalAmountItem = subTotal - discount;
-    let grandTotalAmount =
-        parseFloat(totalAmountItem) + parseFloat(shipCharges);
-    let dueAmountItem = grandTotalAmount - paidAmount;
-
-    let subTotalStateHandler = () => {
-        setData("subtotal", totalAmount);
-    };
-
-    useEffect(() => {
-        subTotalStateHandler();
-    }, [totalAmount]);
-
     const handleSubmit = () => {
         console.log(formData);
         //readOnlyValuesStateUpdate();
@@ -159,8 +140,15 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
         // totalStateHandler();
         // dueAmountStateHandler();
         // grandTotalStateHandler();
-        submitHandler();
+
+        total, grandTotal, totalItems, submitHandler();
     };
+
+    let subTotal = totalAmount;
+    let totalAmountItem = subTotal - discount;
+    let grandTotalAmount =
+        parseFloat(totalAmountItem) + parseFloat(shipCharges);
+    let dueAmount = parseFloat(grandTotalAmount) - parseFloat(paidAmount);
 
     return (
         <div className="py-2">
@@ -189,7 +177,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                     <h3 className="text-center font-bold text-2xl text-orange-600 font-serif">
                         Estimate Management
                     </h3>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={submitHandler}>
                         <div className="flex sm:flex-col md:flex-row justify-center items-center">
                             <div className="sm:w-[100%] md:w-[50%] m-3">
                                 <label htmlFor="ebclient" className="">
@@ -520,11 +508,8 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                                     <option>Select Tax Mode</option>
                                     {esmtax.map(function (data) {
                                         return (
-                                            <option
-                                                key={data.value}
-                                                value={data.value}
-                                            >
-                                                {`${data.label}`}
+                                            <option key={data.value}>
+                                                {data.value}
                                             </option>
                                         );
                                     })}
@@ -550,7 +535,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                             <div className="sm:w-[100%] md:w-[45%] m-3">
                                 <label htmlFor="totalItems">Total Items</label>
                                 <Forminput
-                                    readOnly
+                                    // readOnly
                                     type="number"
                                     id="totalItems"
                                     value={formData.length}
@@ -602,9 +587,12 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                             <div className="sm:w-[100%] md:w-[45%] m-3">
                                 <label htmlFor="grandtotal">GRAND TOTAL</label>
                                 <Forminput
-                                    readOnly
+                                    //readOnly
                                     id="grandtotal"
-                                    value={grandTotalAmount}
+                                    value={grandTotal}
+                                    onChange={(e) =>
+                                        setData("grandtotal", e.target.value)
+                                    }
                                     placeholder="Total Items"
                                 />
                             </div>
@@ -623,7 +611,7 @@ const EstimateForm = ({ data, setData, saveButton, submitHandler, esmtax }) => {
                                 <Forminput
                                     readOnly
                                     id="dueamount"
-                                    value={dueAmountItem}
+                                    value={dueAmount}
                                     placeholder="Due Amount"
                                 />
                             </div>

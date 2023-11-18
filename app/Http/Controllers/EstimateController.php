@@ -26,7 +26,7 @@ class EstimateController extends Controller
      */
     public function create()
     {
-        $esmtax = Setting::where('type', '=', 'LIST')->where('name', '=', 'esmtax')->get(['name AS label', 'value', 'id AS key']);
+        $esmtax = Setting::where('type', '=', 'TAXMODE')->where('status', '=', 'ACTIVE')->get(['name AS label', 'value', 'id AS key']);
         
         return Inertia::render('Estimates/CreateEstimate', [
             'record'=> new Estimate(),
@@ -39,12 +39,25 @@ class EstimateController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-        // $requestData = $request->all();
-        // $data = Estimate::create($requestData);
-        // $data->save();
+        //dd($request);
+        $requestData = $request->all();
 
-        // return to_route('estimates.index');
+        $estimateArray = $request->input('request', []);
+
+    
+        $subtotal = $estimateArray['subtotal'] ?? 0; 
+
+
+        $grandtotal = $subtotal * 10;
+
+
+        $estimateArray['grandtotal'] = $grandtotal;
+
+        
+        $data = Estimate::create($estimateArray);
+        $data->save();
+
+        return to_route('estimates.index');
     }
 
     /**
